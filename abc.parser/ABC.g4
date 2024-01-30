@@ -14,7 +14,7 @@ field_length : 'L:' fraction NEWLINE ;
 field_meter : 'M:' time_signature NEWLINE ;
 field_tempo : 'Q:' tempo_def NEWLINE ;
 
-key_sig : note (accidental_key)? (mode_key)? ;
+key_signature : note (accidental_key)? (mode_key)? ;
 accidental_key : '#' | 'b' ;
 mode_key : 'm' ;
 
