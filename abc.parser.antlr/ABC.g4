@@ -1,4 +1,5 @@
 ﻿grammar ABC ;
+options { language=CSharp; }
 
 abc_file : abc_header abc_music ;
 
