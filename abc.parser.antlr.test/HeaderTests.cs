@@ -91,4 +91,16 @@ public class HeaderTests
 
         Assert.That(fakeListener.Composer, Is.EqualTo("W. Mozart"));
     }
+
+    [Test]
+    public void ParsesNoteLength()
+    {
+        var fakeListener = new TestHeaderListener();
+        var parseTree = SetupHelpers.SetUpHeaderParseTree(TEST_HEADER);
+        var walker = new ParseTreeWalker();
+
+        walker.Walk(fakeListener, parseTree);
+
+        Assert.That(fakeListener.DefaultNoteLength, Is.EqualTo("1/4"));
+    }
 }

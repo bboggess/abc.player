@@ -24,6 +24,8 @@ internal class TestHeaderListener : ABCBaseListener
 
     public string? Composer { get; private set; }
 
+    public string? DefaultNoteLength { get; private set; }
+
     public override void EnterFieldTitle([NotNull] ABCParser.FieldTitleContext context)
 
     {
@@ -53,5 +55,10 @@ internal class TestHeaderListener : ABCBaseListener
     public override void EnterFieldComposer([NotNull] ABCParser.FieldComposerContext context)
     {
         Composer = context.text().GetText();
+    }
+
+    public override void EnterFieldLength([NotNull] ABCParser.FieldLengthContext context)
+    {
+        DefaultNoteLength = context.fraction().GetText();
     }
 }
