@@ -1,7 +1,7 @@
 ﻿grammar ABC ;
 options { language=CSharp; }
 
-abcFile : abcHeader abcMusic ;
+abcTune : abcHeader abcMusic ;
 
 abcHeader : fieldNumber fieldTitle optionalField* fieldKey ;
 
