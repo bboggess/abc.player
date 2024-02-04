@@ -25,8 +25,7 @@ public partial class RequiredFieldsHeaderTests
 
     [Test]
     public void ParserErrorIfMissingTitle()
-    {
-        
+    {  
         var errorDetector = new ParserErrorDetector();
         var parser = SetupHelpers.SetUpParser(HEADER_NO_TITLE, errorDetector);
 
@@ -39,7 +38,6 @@ public partial class RequiredFieldsHeaderTests
     [Test]
     public void ParserErrorIfMissingKey()
     {
-
         var errorDetector = new ParserErrorDetector();
         var parser = SetupHelpers.SetUpParser(HEADER_NO_KEY, errorDetector);
 
@@ -52,7 +50,6 @@ public partial class RequiredFieldsHeaderTests
     [Test]
     public void ParserErrorIfMissingTrackNum()
     {
-
         var errorDetector = new ParserErrorDetector();
         var parser = SetupHelpers.SetUpParser(HEADER_NO_TRACK, errorDetector);
 
