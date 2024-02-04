@@ -7,94 +7,55 @@ namespace abc.parser.antlr.test;
 /// </summary>
 public class MeterHeaderTests
 {
-    private const string COMMON_TIME_HEADER = """
-                                                X:1
-                                                T:Piece 1
-                                                M:C
-                                                K:C
-
-                                                """;
-
-    private const string CUT_TIME_HEADER = """
-                                            X:1
-                                            T:Piece 1
-                                            M:C|
-                                            K:C
-
-                                            """;
-
-    private const string INVALID_METER_HEADER = """
-                                                X:1
-                                                T:Piece 1
-                                                M:D
-                                                K:C
-
-                                                """;
-
-    private const string FRACTION_METER_HEADER = """
-                                                X:1
-                                                T:Piece 1
-                                                M:31/16
-                                                K:C
-
-                                                """;
-
     [Test]
-    public void AcceptsCommonTime()
+    public void AcceptsSpecialValues([Values("C", "C|")] string time)
     {
+        var specialMeterHeader = $"M:{time}\n";
         var fakeListener = new TestHeaderListener();
-        var parseTree = SetupHelpers.SetUpParseTree(COMMON_TIME_HEADER);
+        var errorDetector = new ParserErrorDetector();
+
+        var parser = SetupHelpers.SetUpParser(specialMeterHeader, errorDetector);
+        var parseTree = parser.fieldMeter();
         var walker = new ParseTreeWalker();
 
         walker.Walk(fakeListener, parseTree);
 
-        Assert.That(fakeListener.Meter, Is.EqualTo("C"));
+        Assert.Multiple(() =>
+        {
+            Assert.That(fakeListener.Meter, Is.EqualTo(time));
+            Assert.That(errorDetector.HasErrors, Is.False);
+        });
     }
 
     [Test]
-    public void AcceptsCutTime()
+    public void AcceptsFractionalMeter([Random(1, 32, 10)] int numer, [Random(1, 32, 10)] int denom)
     {
+        var fractionalMeterHeader = $"M:{numer}/{denom}\n";
         var fakeListener = new TestHeaderListener();
-        var parseTree = SetupHelpers.SetUpParseTree(CUT_TIME_HEADER);
+        var errorDetector = new ParserErrorDetector();
+
+        var parser = SetupHelpers.SetUpParser(fractionalMeterHeader, errorDetector);
+        var parseTree = parser.fieldMeter();
         var walker = new ParseTreeWalker();
 
         walker.Walk(fakeListener, parseTree);
 
-        Assert.That(fakeListener.Meter, Is.EqualTo("C|"));
-    }
-
-    [Test]
-    public void AcceptsFractionalMeter()
-    {
-        var fakeListener = new TestHeaderListener();
-        var parseTree = SetupHelpers.SetUpParseTree(FRACTION_METER_HEADER);
-        var walker = new ParseTreeWalker();
-
-        walker.Walk(fakeListener, parseTree);
-
-        Assert.That(fakeListener.Meter, Is.EqualTo("31/16"));
-    }
-
-    [Test]
-    public void RejectsInvalidMeter()
-    {
-        var fakeListener = new TestHeaderListener();
-        var parseTree = SetupHelpers.SetUpParseTree(INVALID_METER_HEADER);
-        var walker = new ParseTreeWalker();
-
-        walker.Walk(fakeListener, parseTree);
-
-        Assert.That(fakeListener.Meter, Is.Empty);
+        var expectedMeter = $"{numer}/{denom}";
+        Assert.Multiple(() =>
+        {
+            Assert.That(fakeListener.Meter, Is.EqualTo(expectedMeter));
+            Assert.That(errorDetector.HasErrors, Is.False);
+        });
     }
 
     [Test]
     public void ParserErrorOnInvalidMeter()
     {
+        var invalidMeter = "M:D\n";
         var errorDetector = new ParserErrorDetector();
-        var parser = SetupHelpers.SetUpParser(INVALID_METER_HEADER, errorDetector);
+        var parser = SetupHelpers.SetUpParser(invalidMeter,errorDetector);
 
-        // Now let's actually parse the header
-        var _ = parser.abcFile();
+        var _ = parser.fieldMeter();
 
         Assert.That(errorDetector.HasErrors, Is.True);
     }
