@@ -21,12 +21,28 @@ internal class SetupHelpers
     /// <returns>Parse tree that can be walked.</returns>
     public static IParseTree SetUpParseTree(string testContent)
     {
+        var parser = SetUpParser(testContent);
+        return parser.abcFile();
+    }
+
+    /// <summary>
+    /// Builds up the parser from file content, allowing you to set up the
+    /// parse tree at a smaller scope than the entire file.
+    /// 
+    /// You need to manually create a parse tree from here.
+    /// </summary>
+    /// <param name="testContent">
+    /// String containing the ABC file content to test with. This needs to be
+    /// formatted exactly as an ABC file would be, with newlines and all.
+    /// </param>
+    /// <returns>A parser you can then use to build a parse tree</returns>
+    public static ABCParser SetUpParser(string testContent)
+    {
         var inputStream = new AntlrInputStream(testContent);
         var lexer = new ABCLexer(inputStream);
         var tokens = new CommonTokenStream(lexer);
-        var parser = new ABCParser(tokens);
 
-        return parser.abcFile();
+        return new ABCParser(tokens);
     }
 
     /// <summary>
@@ -44,11 +60,7 @@ internal class SetupHelpers
     /// <returns>A parser you can then use to build a parse tree</returns>
     public static ABCParser SetUpParser(string testContent, IAntlrErrorListener<IToken> errorListener)
     {
-        var inputStream = new AntlrInputStream(testContent);
-        var lexer = new ABCLexer(inputStream);
-        var tokens = new CommonTokenStream(lexer);
-
-        var parser = new ABCParser(tokens);
+        var parser = SetUpParser(testContent);
         parser.RemoveErrorListeners();
         parser.AddErrorListener(errorListener);
 
