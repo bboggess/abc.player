@@ -14,7 +14,7 @@ public class MeterHeaderTests
         var fakeListener = new TestHeaderListener();
         var errorDetector = new ParserErrorDetector();
 
-        var parser = SetupHelpers.SetUpParser(specialMeterHeader, errorDetector);
+        var parser = SetupHeaderHelpers.SetUpParser(specialMeterHeader, errorDetector);
         var parseTree = parser.fieldMeter();
         var walker = new ParseTreeWalker();
 
@@ -34,7 +34,7 @@ public class MeterHeaderTests
         var fakeListener = new TestHeaderListener();
         var errorDetector = new ParserErrorDetector();
 
-        var parser = SetupHelpers.SetUpParser(fractionalMeterHeader, errorDetector);
+        var parser = SetupHeaderHelpers.SetUpParser(fractionalMeterHeader, errorDetector);
         var parseTree = parser.fieldMeter();
         var walker = new ParseTreeWalker();
 
@@ -53,7 +53,7 @@ public class MeterHeaderTests
     {
         var invalidMeter = "M:D\n";
         var errorDetector = new ParserErrorDetector();
-        var parser = SetupHelpers.SetUpParser(invalidMeter, errorDetector);
+        var parser = SetupHeaderHelpers.SetUpParser(invalidMeter, errorDetector);
 
         var _ = parser.fieldMeter();
 

@@ -15,7 +15,7 @@ public class OptionalFieldsHeaderTests
 
                                     """;
         var errorDetector = new ParserErrorDetector();
-        var parser = SetupHelpers.SetUpParser(noOptionalFieldsHeader, errorDetector);
+        var parser = SetupHeaderHelpers.SetUpParser(noOptionalFieldsHeader, errorDetector);
 
         // Now let's actually parse the header
         var _ = parser.tuneHeader();

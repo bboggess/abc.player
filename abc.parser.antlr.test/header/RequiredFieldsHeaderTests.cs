@@ -14,7 +14,7 @@ public partial class RequiredFieldsHeaderTests
                                  
                                  """;
         var errorDetector = new ParserErrorDetector();
-        var parser = SetupHelpers.SetUpParser(headerWithoutTitle, errorDetector);
+        var parser = SetupHeaderHelpers.SetUpParser(headerWithoutTitle, errorDetector);
 
         // Now let's actually parse the header
         var _ = parser.tuneHeader();
@@ -31,7 +31,7 @@ public partial class RequiredFieldsHeaderTests
                                  
                                  """;
         var errorDetector = new ParserErrorDetector();
-        var parser = SetupHelpers.SetUpParser(headerWithoutKey, errorDetector);
+        var parser = SetupHeaderHelpers.SetUpParser(headerWithoutKey, errorDetector);
 
         // Now let's actually parse the header
         var _ = parser.tuneHeader();
@@ -48,7 +48,7 @@ public partial class RequiredFieldsHeaderTests
                                  
                                  """;
         var errorDetector = new ParserErrorDetector();
-        var parser = SetupHelpers.SetUpParser(headerWithoutTrack, errorDetector);
+        var parser = SetupHeaderHelpers.SetUpParser(headerWithoutTrack, errorDetector);
 
         // Now let's actually parse the header
         var _ = parser.tuneHeader();

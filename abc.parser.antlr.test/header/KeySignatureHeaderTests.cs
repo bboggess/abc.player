@@ -18,7 +18,7 @@ public class KeySignatureHeaderTests
         var fakeListener = new TestHeaderListener();
         var errorDetector = new ParserErrorDetector();
 
-        var parser = SetupHelpers.SetUpParser(keyHeaderField, errorDetector);
+        var parser = SetupHeaderHelpers.SetUpParser(keyHeaderField, errorDetector);
         var parseTree = parser.fieldKey();
         var walker = new ParseTreeWalker();
 
@@ -39,7 +39,7 @@ public class KeySignatureHeaderTests
     {
         var invalidNoteHeader = $"K:{key}\n";
         var errorDetector = new ParserErrorDetector();
-        var parser = SetupHelpers.SetUpParser(invalidNoteHeader, errorDetector);
+        var parser = SetupHeaderHelpers.SetUpParser(invalidNoteHeader, errorDetector);
 
         var _ = parser.fieldKey();
 
@@ -51,7 +51,7 @@ public class KeySignatureHeaderTests
     {
         var invalidModeHeader = $"K:C{mode}\n";
         var errorDetector = new ParserErrorDetector();
-        var parser = SetupHelpers.SetUpParser(invalidModeHeader, errorDetector);
+        var parser = SetupHeaderHelpers.SetUpParser(invalidModeHeader, errorDetector);
 
         var _ = parser.fieldKey();
 

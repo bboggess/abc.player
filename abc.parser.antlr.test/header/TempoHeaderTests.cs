@@ -14,7 +14,7 @@ public class TempoHeaderTests
         var fakeListener = new TestHeaderListener();
         var errorDetector = new ParserErrorDetector();
 
-        var parser = SetupHelpers.SetUpParser(tempoHeader, errorDetector);
+        var parser = SetupHeaderHelpers.SetUpParser(tempoHeader, errorDetector);
         var parseTree = parser.fieldTempo();
         var walker = new ParseTreeWalker();
 
@@ -33,7 +33,7 @@ public class TempoHeaderTests
     {
         var missingBeat = $"Q:{bpm}\n";
         var errorDetector = new ParserErrorDetector();
-        var parser = SetupHelpers.SetUpParser(missingBeat, errorDetector);
+        var parser = SetupHeaderHelpers.SetUpParser(missingBeat, errorDetector);
 
         var _ = parser.fieldTempo();
 
@@ -45,7 +45,7 @@ public class TempoHeaderTests
     {
         var missingBeat = $"Q:{beat}={bpm}\n";
         var errorDetector = new ParserErrorDetector();
-        var parser = SetupHelpers.SetUpParser(missingBeat, errorDetector);
+        var parser = SetupHeaderHelpers.SetUpParser(missingBeat, errorDetector);
 
         var _ = parser.fieldTempo();
 
@@ -57,7 +57,7 @@ public class TempoHeaderTests
     {
         var missingBeat = $"Q:{numer}/{denom}\n";
         var errorDetector = new ParserErrorDetector();
-        var parser = SetupHelpers.SetUpParser(missingBeat, errorDetector);
+        var parser = SetupHeaderHelpers.SetUpParser(missingBeat, errorDetector);
 
         var _ = parser.fieldTempo();
 

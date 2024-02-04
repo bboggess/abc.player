@@ -9,8 +9,11 @@ namespace abc.parser.antlr.test.header;
 /// As a note, we are preferring helpers over framework level
 /// setup methods.
 /// </summary>
-internal class SetupHelpers
+internal class SetupHeaderHelpers
 {
+    private static readonly Func<ICharStream, AbcHeaderLexer> LexerFactory = s => new AbcHeaderLexer(s);
+    private static readonly Func<ITokenStream, AbcHeaderParser> ParserFactory = s => new AbcHeaderParser(s);
+
     /// <summary>
     /// Builds up a parse tree from the file content we want to test.
     /// </summary>
@@ -38,11 +41,7 @@ internal class SetupHelpers
     /// <returns>A parser you can then use to build a parse tree</returns>
     public static AbcHeaderParser SetUpParser(string testContent)
     {
-        var inputStream = new AntlrInputStream(testContent);
-        var lexer = new AbcHeaderLexer(inputStream);
-        var tokens = new CommonTokenStream(lexer);
-
-        return new AbcHeaderParser(tokens);
+        return SetupHelpers.SetUpParser(testContent, LexerFactory, ParserFactory);
     }
 
     /// <summary>
@@ -60,10 +59,6 @@ internal class SetupHelpers
     /// <returns>A parser you can then use to build a parse tree</returns>
     public static AbcHeaderParser SetUpParser(string testContent, IAntlrErrorListener<IToken> errorListener)
     {
-        var parser = SetUpParser(testContent);
-        parser.RemoveErrorListeners();
-        parser.AddErrorListener(errorListener);
-
-        return parser;
+        return SetupHelpers.SetUpParser(testContent, errorListener, LexerFactory, ParserFactory);
     }
 }
