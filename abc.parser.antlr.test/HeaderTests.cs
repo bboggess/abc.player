@@ -12,7 +12,7 @@ public class HeaderTests
     private const string TEST_HEADER = """
                                         X:1
                                         T:Piece 1
-                                        M:4/4 
+                                        M:4/4
                                         L:1/4
                                         C:W. Mozart
                                         Q:1/4=140
@@ -24,7 +24,7 @@ public class HeaderTests
     public void ParsesTitle()
     {
         var fakeListener = new TestHeaderListener();
-        var parseTree = SetupHelpers.SetUpParseTree(TEST_HEADER);
+        var parseTree = SetupHelpers.SetUpHeaderParseTree(TEST_HEADER);
         var walker = new ParseTreeWalker();
 
         walker.Walk(fakeListener, parseTree);
@@ -36,7 +36,7 @@ public class HeaderTests
     public void ParsesTrackNum()
     {
         var fakeListener = new TestHeaderListener();
-        var parseTree = SetupHelpers.SetUpParseTree(TEST_HEADER);
+        var parseTree = SetupHelpers.SetUpHeaderParseTree(TEST_HEADER);
         var walker = new ParseTreeWalker();
 
         walker.Walk(fakeListener, parseTree);
@@ -48,7 +48,7 @@ public class HeaderTests
     public void ParsesMeter()
     {
         var fakeListener = new TestHeaderListener();
-        var parseTree = SetupHelpers.SetUpParseTree(TEST_HEADER);
+        var parseTree = SetupHelpers.SetUpHeaderParseTree(TEST_HEADER);
         var walker = new ParseTreeWalker();
 
         walker.Walk(fakeListener, parseTree);
@@ -60,7 +60,7 @@ public class HeaderTests
     public void ParsesKey()
     {
         var fakeListener = new TestHeaderListener();
-        var parseTree = SetupHelpers.SetUpParseTree(TEST_HEADER);
+        var parseTree = SetupHelpers.SetUpHeaderParseTree(TEST_HEADER);
         var walker = new ParseTreeWalker();
 
         walker.Walk(fakeListener, parseTree);
@@ -72,7 +72,7 @@ public class HeaderTests
     public void ParsesTempo()
     {
         var fakeListener = new TestHeaderListener();
-        var parseTree = SetupHelpers.SetUpParseTree(TEST_HEADER);
+        var parseTree = SetupHelpers.SetUpHeaderParseTree(TEST_HEADER);
         var walker = new ParseTreeWalker();
 
         walker.Walk(fakeListener, parseTree);
@@ -84,7 +84,7 @@ public class HeaderTests
     public void ParsesComposer()
     {
         var fakeListener = new TestHeaderListener();
-        var parseTree = SetupHelpers.SetUpParseTree(TEST_HEADER);
+        var parseTree = SetupHelpers.SetUpHeaderParseTree(TEST_HEADER);
         var walker = new ParseTreeWalker();
 
         walker.Walk(fakeListener, parseTree);

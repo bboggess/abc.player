@@ -19,10 +19,10 @@ internal class SetupHelpers
     /// formatted exactly as an ABC file would be, with newlines and all.
     /// </param>
     /// <returns>Parse tree that can be walked.</returns>
-    public static IParseTree SetUpParseTree(string testContent)
+    public static IParseTree SetUpHeaderParseTree(string testContent)
     {
         var parser = SetUpParser(testContent);
-        return parser.abcFile();
+        return parser.abcHeader();
     }
 
     /// <summary>
