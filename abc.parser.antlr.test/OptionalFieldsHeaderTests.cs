@@ -18,7 +18,7 @@ public class OptionalFieldsHeaderTests
         var parser = SetupHelpers.SetUpParser(noOptionalFieldsHeader, errorDetector);
 
         // Now let's actually parse the header
-        var _ = parser.abcFile();
+        var _ = parser.abcHeader();
 
         Assert.That(errorDetector.HasErrors, Is.False);
     }
