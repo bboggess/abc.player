@@ -5,29 +5,16 @@
 /// </summary>
 public partial class RequiredFieldsHeaderTests
 {
-    private const string HEADER_NO_TITLE = """
-                                           X:1
-                                           K:C
-                                           
-                                           """;
-
-    private const string HEADER_NO_KEY = """
-                                         X:1
-                                         T:Piece 1
-                                         
-                                         """;
-
-    private const string HEADER_NO_TRACK = """
-                                           T:Piece 1
-                                           K:C
-                                             
-                                           """;
-
     [Test]
     public void ParserErrorIfMissingTitle()
-    {  
+    {
+        var headerWithoutTitle = """
+                                 X:1
+                                 K:C
+                                 
+                                 """;
         var errorDetector = new ParserErrorDetector();
-        var parser = SetupHelpers.SetUpParser(HEADER_NO_TITLE, errorDetector);
+        var parser = SetupHelpers.SetUpParser(headerWithoutTitle, errorDetector);
 
         // Now let's actually parse the header
         var _ = parser.abcFile();
@@ -38,8 +25,13 @@ public partial class RequiredFieldsHeaderTests
     [Test]
     public void ParserErrorIfMissingKey()
     {
+        var headerWithoutKey = """
+                                 X:1
+                                 T:Piece 1
+                                 
+                                 """;
         var errorDetector = new ParserErrorDetector();
-        var parser = SetupHelpers.SetUpParser(HEADER_NO_KEY, errorDetector);
+        var parser = SetupHelpers.SetUpParser(headerWithoutKey, errorDetector);
 
         // Now let's actually parse the header
         var _ = parser.abcFile();
@@ -50,8 +42,13 @@ public partial class RequiredFieldsHeaderTests
     [Test]
     public void ParserErrorIfMissingTrackNum()
     {
+        var headerWithoutTrack = """
+                                 T:Piece 1
+                                 K:C
+                                 
+                                 """;
         var errorDetector = new ParserErrorDetector();
-        var parser = SetupHelpers.SetUpParser(HEADER_NO_TRACK, errorDetector);
+        var parser = SetupHelpers.SetUpParser(headerWithoutTrack, errorDetector);
 
         // Now let's actually parse the header
         var _ = parser.abcFile();

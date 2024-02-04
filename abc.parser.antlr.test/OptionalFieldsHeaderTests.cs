@@ -5,18 +5,17 @@
 /// </summary>
 public class OptionalFieldsHeaderTests
 {
-    private const string NO_OPTIONAL_FIELDS_HEADER = """
-                                                    X:1
-                                                    T:Piece 1
-                                                    K:C
-
-                                                    """;
-
     [Test]
     public void NoParserErrorWhenNoOptionalFields()
     {
+        var noOptionalFieldsHeader = """
+                                    X:1
+                                    T:Piece 1
+                                    K:C
+
+                                    """;
         var errorDetector = new ParserErrorDetector();
-        var parser = SetupHelpers.SetUpParser(NO_OPTIONAL_FIELDS_HEADER, errorDetector);
+        var parser = SetupHelpers.SetUpParser(noOptionalFieldsHeader, errorDetector);
 
         // Now let's actually parse the header
         var _ = parser.abcFile();
