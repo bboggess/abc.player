@@ -1,6 +1,6 @@
 ﻿using Antlr4.Runtime.Tree;
 
-namespace abc.parser.antlr.test;
+namespace abc.parser.antlr.test.header;
 
 /// <summary>
 /// Tests for parsing the tempo map.

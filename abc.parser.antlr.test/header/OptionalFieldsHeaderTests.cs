@@ -1,4 +1,4 @@
-﻿namespace abc.parser.antlr.test;
+﻿namespace abc.parser.antlr.test.header;
 
 /// <summary>
 /// Tests that optional fields can be omitted from the header.
@@ -18,7 +18,7 @@ public class OptionalFieldsHeaderTests
         var parser = SetupHelpers.SetUpParser(noOptionalFieldsHeader, errorDetector);
 
         // Now let's actually parse the header
-        var _ = parser.abcHeader();
+        var _ = parser.tuneHeader();
 
         Assert.That(errorDetector.HasErrors, Is.False);
     }

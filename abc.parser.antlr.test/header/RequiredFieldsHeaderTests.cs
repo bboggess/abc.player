@@ -1,4 +1,4 @@
-﻿namespace abc.parser.antlr.test;
+﻿namespace abc.parser.antlr.test.header;
 
 /// <summary>
 /// Tests that required header fields are in fact required.
@@ -17,7 +17,7 @@ public partial class RequiredFieldsHeaderTests
         var parser = SetupHelpers.SetUpParser(headerWithoutTitle, errorDetector);
 
         // Now let's actually parse the header
-        var _ = parser.abcHeader();
+        var _ = parser.tuneHeader();
 
         Assert.That(errorDetector.HasErrors, Is.True);
     }
@@ -34,7 +34,7 @@ public partial class RequiredFieldsHeaderTests
         var parser = SetupHelpers.SetUpParser(headerWithoutKey, errorDetector);
 
         // Now let's actually parse the header
-        var _ = parser.abcHeader();
+        var _ = parser.tuneHeader();
 
         Assert.That(errorDetector.HasErrors, Is.True);
     }
@@ -51,7 +51,7 @@ public partial class RequiredFieldsHeaderTests
         var parser = SetupHelpers.SetUpParser(headerWithoutTrack, errorDetector);
 
         // Now let's actually parse the header
-        var _ = parser.abcHeader();
+        var _ = parser.tuneHeader();
 
         Assert.That(errorDetector.HasErrors, Is.True);
     }

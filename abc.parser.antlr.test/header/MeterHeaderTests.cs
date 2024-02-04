@@ -1,6 +1,6 @@
 ﻿using Antlr4.Runtime.Tree;
 
-namespace abc.parser.antlr.test;
+namespace abc.parser.antlr.test.header;
 
 /// <summary>
 /// Tests for logic specific to formatting the track's meter.
@@ -53,7 +53,7 @@ public class MeterHeaderTests
     {
         var invalidMeter = "M:D\n";
         var errorDetector = new ParserErrorDetector();
-        var parser = SetupHelpers.SetUpParser(invalidMeter,errorDetector);
+        var parser = SetupHelpers.SetUpParser(invalidMeter, errorDetector);
 
         var _ = parser.fieldMeter();
 

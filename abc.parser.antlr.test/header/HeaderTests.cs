@@ -1,6 +1,6 @@
 using Antlr4.Runtime.Tree;
 
-namespace abc.parser.antlr.test;
+namespace abc.parser.antlr.test.header;
 
 /// <summary>
 /// Runs test cases on a simple header with all supported fields.

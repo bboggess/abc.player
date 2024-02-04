@@ -1,7 +1,7 @@
 ﻿using Antlr4.Runtime.Tree;
 using Antlr4.Runtime;
 
-namespace abc.parser.antlr.test;
+namespace abc.parser.antlr.test.header;
 
 /// <summary>
 /// Shared setup code for unit tests.
@@ -22,7 +22,7 @@ internal class SetupHelpers
     public static IParseTree SetUpHeaderParseTree(string testContent)
     {
         var parser = SetUpParser(testContent);
-        return parser.abcHeader();
+        return parser.tuneHeader();
     }
 
     /// <summary>
@@ -36,13 +36,13 @@ internal class SetupHelpers
     /// formatted exactly as an ABC file would be, with newlines and all.
     /// </param>
     /// <returns>A parser you can then use to build a parse tree</returns>
-    public static ABCParser SetUpParser(string testContent)
+    public static AbcHeaderParser SetUpParser(string testContent)
     {
         var inputStream = new AntlrInputStream(testContent);
-        var lexer = new ABCLexer(inputStream);
+        var lexer = new AbcHeaderLexer(inputStream);
         var tokens = new CommonTokenStream(lexer);
 
-        return new ABCParser(tokens);
+        return new AbcHeaderParser(tokens);
     }
 
     /// <summary>
@@ -58,7 +58,7 @@ internal class SetupHelpers
     /// </param>
     /// <param name="errorListener">An error listener to attach. Will replace the default.</param>
     /// <returns>A parser you can then use to build a parse tree</returns>
-    public static ABCParser SetUpParser(string testContent, IAntlrErrorListener<IToken> errorListener)
+    public static AbcHeaderParser SetUpParser(string testContent, IAntlrErrorListener<IToken> errorListener)
     {
         var parser = SetUpParser(testContent);
         parser.RemoveErrorListeners();

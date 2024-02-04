@@ -1,6 +1,6 @@
 ﻿using Antlr4.Runtime.Misc;
 
-namespace abc.parser.antlr.test;
+namespace abc.parser.antlr.test.header;
 
 /// <summary>
 /// Tests the definition of our header grammar. When the parse tree is walked,
@@ -10,7 +10,7 @@ namespace abc.parser.antlr.test;
 /// of converting purely numeric fields (e.g. track ID) into ints. All other
 /// fields will simply have the raw text found in the track header.
 /// </summary>
-internal class TestHeaderListener : ABCBaseListener
+internal class TestHeaderListener : AbcHeaderBaseListener
 {
     public string? Title { get; private set; }
 
@@ -26,38 +26,38 @@ internal class TestHeaderListener : ABCBaseListener
 
     public string? DefaultNoteLength { get; private set; }
 
-    public override void EnterFieldTitle([NotNull] ABCParser.FieldTitleContext context)
+    public override void EnterFieldTitle([NotNull] AbcHeaderParser.FieldTitleContext context)
 
     {
         Title = context.text().GetText();
     }
 
-    public override void EnterFieldNumber([NotNull] ABCParser.FieldNumberContext context)
+    public override void EnterFieldNumber([NotNull] AbcHeaderParser.FieldNumberContext context)
     {
         TrackNum = int.Parse(context.INT().GetText());
     }
 
-    public override void EnterFieldMeter([NotNull] ABCParser.FieldMeterContext context)
+    public override void EnterFieldMeter([NotNull] AbcHeaderParser.FieldMeterContext context)
     {
         Meter = context.timeSignature().GetText();
     }
 
-    public override void EnterFieldKey([NotNull] ABCParser.FieldKeyContext context)
+    public override void EnterFieldKey([NotNull] AbcHeaderParser.FieldKeyContext context)
     {
         Key = context.keySignature().GetText();
     }
 
-    public override void EnterFieldTempo([NotNull] ABCParser.FieldTempoContext context)
+    public override void EnterFieldTempo([NotNull] AbcHeaderParser.FieldTempoContext context)
     {
         TempoDesc = context.tempoDef().GetText();
     }
 
-    public override void EnterFieldComposer([NotNull] ABCParser.FieldComposerContext context)
+    public override void EnterFieldComposer([NotNull] AbcHeaderParser.FieldComposerContext context)
     {
         Composer = context.text().GetText();
     }
 
-    public override void EnterFieldLength([NotNull] ABCParser.FieldLengthContext context)
+    public override void EnterFieldLength([NotNull] AbcHeaderParser.FieldLengthContext context)
     {
         DefaultNoteLength = context.fraction().GetText();
     }

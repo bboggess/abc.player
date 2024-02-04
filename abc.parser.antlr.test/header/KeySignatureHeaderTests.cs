@@ -1,6 +1,6 @@
 ﻿using Antlr4.Runtime.Tree;
 
-namespace abc.parser.antlr.test;
+namespace abc.parser.antlr.test.header;
 
 /// <summary>
 /// Test parsing for key signature field in header.
@@ -9,7 +9,7 @@ public class KeySignatureHeaderTests
 {
     [Test]
     public void AcceptsValidSignatures(
-        [Values("A", "B" ,"C" ,"D", "E", "F" ,"G")] string note,
+        [Values("A", "B", "C", "D", "E", "F", "G")] string note,
         [Values("", "#", "b")] string accidental,
         [Values("", "m")] string mode
     )
