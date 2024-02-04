@@ -1,33 +1,33 @@
 ﻿grammar ABC ;
 options { language=CSharp; }
 
-abc_file : abc_header abc_music ;
+abcFile : abcHeader abcMusic ;
 
-abc_header : field_number field_title optional_field* field_key ;
+abcHeader : fieldNumber fieldTitle optionalField* fieldKey ;
 
-field_number : 'X:' INT NEWLINE ;
-field_title : 'T:' text NEWLINE ;
-field_key : 'K:' key_signature NEWLINE ;
+fieldNumber : 'X:' INT NEWLINE ;
+fieldTitle : 'T:' text NEWLINE ;
+fieldKey : 'K:' keySignature NEWLINE ;
 
-optional_field : field_composer | field_length | field_meter | field_tempo ;
-field_composer : 'C:' text NEWLINE ;
-field_length : 'L:' fraction NEWLINE ;
-field_meter : 'M:' time_signature NEWLINE ;
-field_tempo : 'Q:' tempo_def NEWLINE ;
+optionalField : fieldComposer | fieldLength | fieldMeter | fieldTempo ;
+fieldComposer : 'C:' text NEWLINE ;
+fieldLength : 'L:' fraction NEWLINE ;
+fieldMeter : 'M:' timeSignature NEWLINE ;
+fieldTempo : 'Q:' tempoDef NEWLINE ;
 
-key_signature : note (accidental_key)? (mode_key)? ;
-accidental_key : '#' | 'b' ;
-mode_key : 'm' ;
+keySignature : note (accidentalKey)? (modeKey)? ;
+accidentalKey : '#' | 'b' ;
+modeKey : 'm' ;
 
-time_signature : fraction | 'C' | 'C|' ;
+timeSignature : fraction | 'C' | 'C|' ;
 fraction : INT '/' INT ;
-tempo_def : fraction '=' INT ;
+tempoDef : fraction '=' INT ;
 
 note : 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' ;
 
-abc_music : additional_line* ;
+abcMusic : additionalLine* ;
 
-additional_line : text+ NEWLINE ;
+additionalLine : text+ NEWLINE ;
 text : (~NEWLINE)+ ;
 
 INT : [1-9] [0-9]* ;
