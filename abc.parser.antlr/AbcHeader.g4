@@ -16,7 +16,10 @@ keySignature : note (accidentalKey)? (modeKey)? ;
 accidentalKey : '#' | 'b' ;
 modeKey : 'm' ;
 
-timeSignature : fraction | 'C' | 'C|' ;
+timeSignature : fraction # fractionMeter
+				| 'C'	 # commonTime
+				| 'C|'	 # cutTime
+				;
 fraction : INT '/' INT ;
 tempoDef : fraction '=' INT ;
 
