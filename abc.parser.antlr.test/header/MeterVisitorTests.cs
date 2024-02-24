@@ -1,4 +1,6 @@
-﻿namespace abc.parser.antlr.test.header;
+﻿using Antlr4.Runtime.Misc;
+
+namespace abc.parser.antlr.test.header;
 public class MeterVisitorTests
 {
     [Test]
@@ -53,16 +55,10 @@ public class MeterVisitorTests
     public void HandleBadData()
     {
         var stringUnderTest = "D"; // arbitrary invalid meter specification
-        var errorDetector = new ParserErrorDetector();
-        var parser = SetupHeaderHelpers.SetUpParser(stringUnderTest, errorDetector);
-        var visitor = new MeterVisitor();
+        var parser = SetupHeaderHelpers.SetUpParser(stringUnderTest);
 
-        var outcome = visitor.Visit(parser.timeSignature());
+        var action = () => { _ = parser.timeSignature(); };
 
-        Assert.Multiple(() =>
-        {
-            Assert.That(errorDetector.HasErrors, Is.True);
-            Assert.That(outcome, Is.Null);
-        });
+        Assert.That(action, Throws.InstanceOf<ParseCanceledException>());
     }
 }

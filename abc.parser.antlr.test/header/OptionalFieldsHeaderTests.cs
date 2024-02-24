@@ -1,4 +1,6 @@
-﻿namespace abc.parser.antlr.test.header;
+﻿using Antlr4.Runtime.Misc;
+
+namespace abc.parser.antlr.test.header;
 
 /// <summary>
 /// Tests that optional fields can be omitted from the header.
@@ -14,12 +16,10 @@ public class OptionalFieldsHeaderTests
                                     K:C
 
                                     """;
-        var errorDetector = new ParserErrorDetector();
-        var parser = SetupHeaderHelpers.SetUpParser(noOptionalFieldsHeader, errorDetector);
+        var parser = SetupHeaderHelpers.SetUpParser(noOptionalFieldsHeader);
 
-        // Now let's actually parse the header
-        var _ = parser.tuneHeader();
+        var action = () => { _ = parser.tuneHeader(); };
 
-        Assert.That(errorDetector.HasErrors, Is.False);
+        Assert.That(action, Throws.Nothing);
     }
 }

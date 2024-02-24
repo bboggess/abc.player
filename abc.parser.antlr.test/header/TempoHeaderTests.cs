@@ -1,4 +1,6 @@
-﻿using Antlr4.Runtime.Tree;
+﻿using Antlr4.Runtime.Misc;
+using Antlr4.Runtime.Tree;
+using NUnit.Framework;
 
 namespace abc.parser.antlr.test.header;
 
@@ -12,55 +14,47 @@ public class TempoHeaderTests
     {
         var tempoHeader = $"Q:{numer}/{denom}={bpm}\n";
         var fakeListener = new TestHeaderListener();
-        var errorDetector = new ParserErrorDetector();
 
-        var parser = SetupHeaderHelpers.SetUpParser(tempoHeader, errorDetector);
+        var parser = SetupHeaderHelpers.SetUpParser(tempoHeader);
         var parseTree = parser.fieldTempo();
         var walker = new ParseTreeWalker();
 
         walker.Walk(fakeListener, parseTree);
 
         var expectedTempo = $"{numer}/{denom}={bpm}";
-        Assert.Multiple(() =>
-        {
-            Assert.That(fakeListener.TempoDesc, Is.EqualTo(expectedTempo));
-            Assert.That(errorDetector.HasErrors, Is.False);
-        });
+        Assert.That(fakeListener.TempoDesc, Is.EqualTo(expectedTempo));
     }
 
     [Test]
     public void ParserErrorIfNoBeatSpecified([Random(5)] int bpm)
     {
         var missingBeat = $"Q:{bpm}\n";
-        var errorDetector = new ParserErrorDetector();
-        var parser = SetupHeaderHelpers.SetUpParser(missingBeat, errorDetector);
+        var parser = SetupHeaderHelpers.SetUpParser(missingBeat);
 
-        var _ = parser.fieldTempo();
+        var action = () => { _ = parser.fieldTempo(); };
 
-        Assert.That(errorDetector.HasErrors, Is.True);
+        Assert.That(action, Throws.InstanceOf<ParseCanceledException>());
     }
 
     [Test]
     public void ParserErrorIfNoFraction([Random(3)] int beat, [Random(3)] int bpm)
     {
         var missingBeat = $"Q:{beat}={bpm}\n";
-        var errorDetector = new ParserErrorDetector();
-        var parser = SetupHeaderHelpers.SetUpParser(missingBeat, errorDetector);
+        var parser = SetupHeaderHelpers.SetUpParser(missingBeat);
 
-        var _ = parser.fieldTempo();
+        var action = () => { _ = parser.fieldTempo(); };
 
-        Assert.That(errorDetector.HasErrors, Is.True);
+        Assert.That(action, Throws.InstanceOf<ParseCanceledException>());
     }
 
-    [Test]
+[Test]
     public void ParserErrorIfNoBpm([Random(3)] int numer, [Random(3)] int denom)
     {
         var missingBeat = $"Q:{numer}/{denom}\n";
-        var errorDetector = new ParserErrorDetector();
-        var parser = SetupHeaderHelpers.SetUpParser(missingBeat, errorDetector);
+        var parser = SetupHeaderHelpers.SetUpParser(missingBeat);
 
-        var _ = parser.fieldTempo();
+        var action = () => { _ = parser.fieldTempo(); };
 
-        Assert.That(errorDetector.HasErrors, Is.True);
+        Assert.That(action, Throws.InstanceOf<ParseCanceledException>());
     }
 }

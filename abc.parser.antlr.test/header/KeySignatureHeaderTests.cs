@@ -1,4 +1,5 @@
-﻿using Antlr4.Runtime.Tree;
+﻿using Antlr4.Runtime.Misc;
+using Antlr4.Runtime.Tree;
 
 namespace abc.parser.antlr.test.header;
 
@@ -16,20 +17,15 @@ public class KeySignatureHeaderTests
     {
         var keyHeaderField = $"K:{note}{accidental}{mode}\n";
         var fakeListener = new TestHeaderListener();
-        var errorDetector = new ParserErrorDetector();
 
-        var parser = SetupHeaderHelpers.SetUpParser(keyHeaderField, errorDetector);
+        var parser = SetupHeaderHelpers.SetUpParser(keyHeaderField);
         var parseTree = parser.fieldKey();
         var walker = new ParseTreeWalker();
 
         walker.Walk(fakeListener, parseTree);
 
         var expectedKey = $"{note}{accidental}{mode}";
-        Assert.Multiple(() =>
-        {
-            Assert.That(fakeListener.Key, Is.EqualTo(expectedKey));
-            Assert.That(errorDetector.HasErrors, Is.False);
-        });
+        Assert.That(fakeListener.Key, Is.EqualTo(expectedKey));
     }
 
     [Test]
@@ -38,23 +34,21 @@ public class KeySignatureHeaderTests
     )
     {
         var invalidNoteHeader = $"K:{key}\n";
-        var errorDetector = new ParserErrorDetector();
-        var parser = SetupHeaderHelpers.SetUpParser(invalidNoteHeader, errorDetector);
+        var parser = SetupHeaderHelpers.SetUpParser(invalidNoteHeader);
 
-        var _ = parser.fieldKey();
+        var action = () => { _ = parser.fieldKey(); };
 
-        Assert.That(errorDetector.HasErrors, Is.True);
+        Assert.That(action, Throws.InstanceOf<ParseCanceledException>());
     }
 
     [Test]
     public void ParserErrorOnInvalidMode([Values("p", "~", "dim", "3")] string mode)
     {
         var invalidModeHeader = $"K:C{mode}\n";
-        var errorDetector = new ParserErrorDetector();
-        var parser = SetupHeaderHelpers.SetUpParser(invalidModeHeader, errorDetector);
+        var parser = SetupHeaderHelpers.SetUpParser(invalidModeHeader);
 
-        var _ = parser.fieldKey();
+        var action = () => { _ = parser.fieldKey(); };
 
-        Assert.That(errorDetector.HasErrors, Is.True);
+        Assert.That(action, Throws.InstanceOf<ParseCanceledException>());
     }
 }

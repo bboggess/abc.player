@@ -1,4 +1,6 @@
-﻿namespace abc.parser.antlr.test.header;
+﻿using Antlr4.Runtime.Misc;
+
+namespace abc.parser.antlr.test.header;
 
 /// <summary>
 /// Tests that required header fields are in fact required.
@@ -13,13 +15,11 @@ public partial class RequiredFieldsHeaderTests
                                  K:C
                                  
                                  """;
-        var errorDetector = new ParserErrorDetector();
-        var parser = SetupHeaderHelpers.SetUpParser(headerWithoutTitle, errorDetector);
+        var parser = SetupHeaderHelpers.SetUpParser(headerWithoutTitle);
 
-        // Now let's actually parse the header
-        var _ = parser.tuneHeader();
+        var action = () => { _ = parser.tuneHeader(); };
 
-        Assert.That(errorDetector.HasErrors, Is.True);
+        Assert.That(action, Throws.InstanceOf<ParseCanceledException>());
     }
 
     [Test]
@@ -30,13 +30,11 @@ public partial class RequiredFieldsHeaderTests
                                  T:Piece 1
                                  
                                  """;
-        var errorDetector = new ParserErrorDetector();
-        var parser = SetupHeaderHelpers.SetUpParser(headerWithoutKey, errorDetector);
+        var parser = SetupHeaderHelpers.SetUpParser(headerWithoutKey);
 
-        // Now let's actually parse the header
-        var _ = parser.tuneHeader();
+        var action = () => { _ = parser.tuneHeader(); };
 
-        Assert.That(errorDetector.HasErrors, Is.True);
+        Assert.That(action, Throws.InstanceOf<ParseCanceledException>());
     }
 
     [Test]
@@ -47,12 +45,10 @@ public partial class RequiredFieldsHeaderTests
                                  K:C
                                  
                                  """;
-        var errorDetector = new ParserErrorDetector();
-        var parser = SetupHeaderHelpers.SetUpParser(headerWithoutTrack, errorDetector);
+        var parser = SetupHeaderHelpers.SetUpParser(headerWithoutTrack);
 
-        // Now let's actually parse the header
-        var _ = parser.tuneHeader();
+        var action = () => { _ = parser.tuneHeader(); };
 
-        Assert.That(errorDetector.HasErrors, Is.True);
+        Assert.That(action, Throws.InstanceOf<ParseCanceledException>());
     }
 }
