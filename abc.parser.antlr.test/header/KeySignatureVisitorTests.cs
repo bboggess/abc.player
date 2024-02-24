@@ -1,4 +1,6 @@
-﻿namespace abc.parser.antlr.test.header;
+﻿using Antlr4.Runtime.Misc;
+
+namespace abc.parser.antlr.test.header;
 public class KeySignatureVisitorTests
 {
     private static readonly Dictionary<string, BaseNote> NoteMap = new()
@@ -43,5 +45,30 @@ public class KeySignatureVisitorTests
             Assert.That(outcome.Tonic.Accidental, Is.EqualTo(AccidentalMap[accidental]));
             Assert.That(outcome.Mode, Is.EqualTo(ModeMap[mode]));
         });
+    }
+
+    [Test]
+    public void ParserErrorOnInvalidNote(
+        [Values("H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z")] string key
+    )
+    {
+        var parser = SetupHeaderHelpers.SetUpParser(key);
+        var visitor = new KeySignatureVisitor();
+
+        var action = () => visitor.Visit(parser.keySignature());
+
+        Assert.That(action, Throws.InstanceOf<ParseCanceledException>());
+    }
+
+    [Test]
+    public void ParserErrorOnInvalidMode([Values("p", "~", "dim", "3")] string mode)
+    {
+        var invalidModeHeader = $"K:C{mode}\n";
+        var parser = SetupHeaderHelpers.SetUpParser(invalidModeHeader);
+        var visitor = new KeySignatureVisitor();
+
+        var action = () => visitor.Visit(parser.keySignature());
+
+        Assert.That(action, Throws.InstanceOf<ParseCanceledException>());
     }
 }
