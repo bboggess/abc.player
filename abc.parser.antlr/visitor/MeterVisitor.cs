@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace abc.parser.antlr;
+namespace abc.parser.antlr.visitor;
 
 /// <summary>
 /// Visitor to handle getting the meter out of an ABC header.

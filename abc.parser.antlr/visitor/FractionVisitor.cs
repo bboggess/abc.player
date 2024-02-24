@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 
-namespace abc.parser.antlr;
+namespace abc.parser.antlr.visitor;
 
 /// <summary>
 /// Parses a fraction found in an ABC header. Can be called from other visitors as needed.

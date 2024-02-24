@@ -1,6 +1,6 @@
 ﻿using Antlr4.Runtime.Misc;
 
-namespace abc.parser.antlr;
+namespace abc.parser.antlr.visitor;
 
 /// <summary>
 /// Parse the key signature from an ABC header.
