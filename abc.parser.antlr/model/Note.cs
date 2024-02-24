@@ -1,4 +1,4 @@
-﻿namespace abc.parser.antlr;
+﻿namespace abc.parser.antlr.model;
 
 public enum BaseNote
 {

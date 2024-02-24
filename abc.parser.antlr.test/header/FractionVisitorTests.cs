@@ -1,4 +1,5 @@
-﻿using abc.parser.antlr.visitor;
+﻿using abc.parser.antlr.model;
+using abc.parser.antlr.visitor;
 
 namespace abc.parser.antlr.test.header;
 internal class FractionVisitorTests

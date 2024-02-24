@@ -1,4 +1,4 @@
-﻿namespace abc.parser.antlr;
+﻿namespace abc.parser.antlr.model;
 
 /// <summary>
 /// A ratio between two nonnegative values. This is meant to be used to
@@ -44,9 +44,9 @@ public class Ratio
     /// </summary>
     /// <param name="top">The numerator</param>
     /// <param name="bottom">The denominator</param>
-    public Ratio(Ratio top, Ratio bottom) : this(top.Numerator* bottom.Denominator, top.Denominator* bottom.Numerator)
+    public Ratio(Ratio top, Ratio bottom) : this(top.Numerator * bottom.Denominator, top.Denominator * bottom.Numerator)
     {
-         
+
     }
 
     /// <summary>
