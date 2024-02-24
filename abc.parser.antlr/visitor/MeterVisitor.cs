@@ -8,6 +8,11 @@ namespace abc.parser.antlr.visitor;
 /// </summary>
 public class MeterVisitor : AbcHeaderBaseVisitor<TimeSignature>
 {
+    public override TimeSignature VisitFieldMeter([NotNull] AbcHeaderParser.FieldMeterContext context)
+    {
+        return Visit(context.timeSignature());
+    }
+
     public override TimeSignature VisitCommonTime([NotNull] AbcHeaderParser.CommonTimeContext context)
     {
         return TimeSignature.FromCommonTime();

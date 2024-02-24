@@ -8,6 +8,11 @@ namespace abc.parser.antlr.visitor;
 /// </summary>
 public class KeySignatureVisitor : AbcHeaderBaseVisitor<KeySignature>
 {
+    public override KeySignature VisitFieldKey([NotNull] AbcHeaderParser.FieldKeyContext context)
+    {
+        return Visit(context.keySignature());
+    }
+
     public override KeySignature VisitKeySignature([NotNull] AbcHeaderParser.KeySignatureContext context)
     {
         var mode = context.modeKey() is null ? Mode.Major : new KeyModeVisitor().Visit(context.modeKey());

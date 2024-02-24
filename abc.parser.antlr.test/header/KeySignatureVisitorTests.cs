@@ -34,11 +34,11 @@ public class KeySignatureVisitorTests
         [Values("", "b", "#")] string accidental,
         [Values("", "m")] string mode)
     {
-        var stringUnderTest = $"{note}{accidental}{mode}";
+        var stringUnderTest = $"K:{note}{accidental}{mode}\n";
         var parser = SetupHeaderHelpers.SetUpParser(stringUnderTest);
         var visitor = new KeySignatureVisitor();
 
-        var outcome = visitor.Visit(parser.keySignature());
+        var outcome = visitor.Visit(parser.fieldKey());
 
         Assert.Multiple(() =>
         {
@@ -54,10 +54,11 @@ public class KeySignatureVisitorTests
         [Values("H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z")] string key
     )
     {
+        var stringUnderTest = $"K:{key}\n";
         var parser = SetupHeaderHelpers.SetUpParser(key);
         var visitor = new KeySignatureVisitor();
 
-        var action = () => visitor.Visit(parser.keySignature());
+        var action = () => visitor.Visit(parser.fieldKey());
 
         Assert.That(action, Throws.InstanceOf<ParseCanceledException>());
     }
@@ -69,7 +70,7 @@ public class KeySignatureVisitorTests
         var parser = SetupHeaderHelpers.SetUpParser(invalidModeHeader);
         var visitor = new KeySignatureVisitor();
 
-        var action = () => visitor.Visit(parser.keySignature());
+        var action = () => visitor.Visit(parser.fieldKey());
 
         Assert.That(action, Throws.InstanceOf<ParseCanceledException>());
     }

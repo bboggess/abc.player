@@ -7,11 +7,11 @@ public class MeterVisitorTests
     [Test]
     public void HandlesCommonTime()
     {
-        var stringUnderTest = "C";
+        var stringUnderTest = "M:C\n";
         var parser = SetupHeaderHelpers.SetUpParser(stringUnderTest);
         var visitor = new MeterVisitor();
 
-        var outcome = visitor.Visit(parser.timeSignature());
+        var outcome = visitor.Visit(parser.fieldMeter());
 
         Assert.Multiple(() =>
         {
@@ -23,11 +23,11 @@ public class MeterVisitorTests
     [Test]
     public void HandlesCutTime()
     {
-        var stringUnderTest = "C|";
+        var stringUnderTest = "M:C|\n";
         var parser = SetupHeaderHelpers.SetUpParser(stringUnderTest);
         var visitor = new MeterVisitor();
 
-        var outcome = visitor.Visit(parser.timeSignature());
+        var outcome = visitor.Visit(parser.fieldMeter());
 
         Assert.Multiple(() =>
         {
@@ -39,11 +39,11 @@ public class MeterVisitorTests
     [Test]
     public void HandlesFractionalTime([Random(1, 32, 5)] int top, [Random(1, 32, 5)] int bottom)
     {
-        var stringUnderTest = $"{top}/{bottom}";
+        var stringUnderTest = $"M:{top}/{bottom}\n";
         var parser = SetupHeaderHelpers.SetUpParser(stringUnderTest);
         var visitor = new MeterVisitor();
 
-        var outcome = visitor.Visit(parser.timeSignature());
+        var outcome = visitor.Visit(parser.fieldMeter());
 
         Assert.Multiple(() =>
         {
@@ -55,10 +55,10 @@ public class MeterVisitorTests
     [Test]
     public void HandleBadData()
     {
-        var stringUnderTest = "D"; // arbitrary invalid meter specification
+        var stringUnderTest = "M:D\n"; // arbitrary invalid meter specification
         var parser = SetupHeaderHelpers.SetUpParser(stringUnderTest);
 
-        var action = () => { _ = parser.timeSignature(); };
+        var action = () => { _ = parser.fieldMeter(); };
 
         Assert.That(action, Throws.InstanceOf<ParseCanceledException>());
     }

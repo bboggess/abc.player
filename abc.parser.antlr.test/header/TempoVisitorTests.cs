@@ -7,11 +7,11 @@ public class TempoVisitorTests
     [Test]
     public void QuarterNoteBpm()
     {
-        var stringUnderTest = $"1/4=120";
+        var stringUnderTest = $"Q:1/4=120\n";
         var parser = SetupHeaderHelpers.SetUpParser(stringUnderTest);
         var visitor = new TempoVisitor();
 
-        var tempoDef = visitor.Visit(parser.tempoDef());
+        var tempoDef = visitor.Visit(parser.fieldTempo());
 
         Assert.That(tempoDef.QuarterNotePerMinute, Is.EqualTo(120));
     }
@@ -19,11 +19,11 @@ public class TempoVisitorTests
     [Test]
     public void HalfNoteBpm()
     {
-        var stringUnderTest = $"1/2=60";
+        var stringUnderTest = $"Q:1/2=60\n";
         var parser = SetupHeaderHelpers.SetUpParser(stringUnderTest);
         var visitor = new TempoVisitor();
 
-        var tempoDef = visitor.Visit(parser.tempoDef());
+        var tempoDef = visitor.Visit(parser.fieldTempo());
 
         Assert.That(tempoDef.QuarterNotePerMinute, Is.EqualTo(120));
     }
@@ -31,11 +31,11 @@ public class TempoVisitorTests
     [Test]
     public void ParserErrorIfNoBeatSpecified([Random(5)] int bpm)
     {
-        var missingBeat = $"{bpm}";
+        var missingBeat = $"Q:{bpm}\n";
         var parser = SetupHeaderHelpers.SetUpParser(missingBeat);
         var visitor = new TempoVisitor();
 
-        var action = () => visitor.Visit(parser.tempoDef());
+        var action = () => visitor.Visit(parser.fieldTempo());
 
         Assert.That(action, Throws.InstanceOf<ParseCanceledException>());
     }
@@ -43,11 +43,11 @@ public class TempoVisitorTests
     [Test]
     public void ParserErrorIfNoFraction([Random(3)] int beat, [Random(3)] int bpm)
     {
-        var malformedPulse = $"{beat}={bpm}";
+        var malformedPulse = $"Q:{beat}={bpm}\n";
         var parser = SetupHeaderHelpers.SetUpParser(malformedPulse);
         var visitor = new TempoVisitor();
 
-        var action = () => visitor.Visit(parser.tempoDef());
+        var action = () => visitor.Visit(parser.fieldTempo());
 
         Assert.That(action, Throws.InstanceOf<ParseCanceledException>());
     }
@@ -55,11 +55,11 @@ public class TempoVisitorTests
     [Test]
     public void ParserErrorIfNoBpm([Random(3)] int numer, [Random(3)] int denom)
     {
-        var noBpm = $"{numer}/{denom}";
+        var noBpm = $"Q:{numer}/{denom}\n";
         var parser = SetupHeaderHelpers.SetUpParser(noBpm);
         var visitor = new TempoVisitor();
 
-        var action = () => visitor.Visit(parser.tempoDef());
+        var action = () => visitor.Visit(parser.fieldTempo());
 
         Assert.That(action, Throws.InstanceOf<ParseCanceledException>());
     }
