@@ -13,8 +13,11 @@ fieldMeter : 'M:' timeSignature NEWLINE ;
 fieldTempo : 'Q:' tempoDef NEWLINE ;
 
 keySignature : note (accidentalKey)? (modeKey)? ;
-accidentalKey : '#' | 'b' ;
-modeKey : 'm' ;
+accidentalKey : '#'		# Sharp
+				| 'b'	# Flat
+				;
+modeKey : 'm' # Minor
+	;
 
 timeSignature : fraction # fractionMeter
 				| 'C'	 # commonTime
