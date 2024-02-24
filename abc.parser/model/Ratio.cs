@@ -1,4 +1,4 @@
-﻿namespace abc.parser.antlr.model;
+﻿namespace abc.parser.model;
 
 /// <summary>
 /// A ratio between two nonnegative values. This is meant to be used to

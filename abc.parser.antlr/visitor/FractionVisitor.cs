@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-using abc.parser.antlr.model;
+using abc.parser.model;
 
 namespace abc.parser.antlr.visitor;
 

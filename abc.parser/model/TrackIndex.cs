@@ -1,4 +1,4 @@
-﻿namespace abc.parser.antlr.model;
+﻿namespace abc.parser.model;
 
 /// <summary>
 /// A track index is a unique indentifier in a collection of tracks.

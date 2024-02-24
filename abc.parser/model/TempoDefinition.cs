@@ -1,4 +1,4 @@
-﻿namespace abc.parser.antlr.model;
+﻿namespace abc.parser.model;
 
 /// <summary>
 /// Defines the tempo at which a piece should be played back

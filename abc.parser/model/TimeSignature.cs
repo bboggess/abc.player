@@ -1,4 +1,4 @@
-﻿namespace abc.parser.antlr.model;
+﻿namespace abc.parser.model;
 
 /// <summary>
 /// Represents time signature of a piece of music.

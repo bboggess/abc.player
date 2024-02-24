@@ -26,4 +26,8 @@
 		</Antlr4>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\abc.parser\abc.parser.csproj" />
+	</ItemGroup>
+
 </Project>

@@ -1,5 +1,5 @@
-﻿using abc.parser.antlr.model;
-using abc.parser.antlr.visitor;
+﻿using abc.parser.antlr.visitor;
+using abc.parser.model;
 
 namespace abc.parser.antlr.test.header;
 

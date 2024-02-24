@@ -1,4 +1,4 @@
-﻿using abc.parser.antlr.model;
+﻿using abc.parser.model;
 using Antlr4.Runtime.Misc;
 
 namespace abc.parser.antlr.visitor;
