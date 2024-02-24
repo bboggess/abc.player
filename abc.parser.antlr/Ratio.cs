@@ -39,6 +39,25 @@ public class Ratio
         Denominator = denominator;
     }
 
+    /// <summary>
+    /// Constructs a ratio as a ratio of two ratios.
+    /// </summary>
+    /// <param name="top">The numerator</param>
+    /// <param name="bottom">The denominator</param>
+    public Ratio(Ratio top, Ratio bottom) : this(top.Numerator* bottom.Denominator, top.Denominator* bottom.Numerator)
+    {
+         
+    }
+
+    /// <summary>
+    /// Returns the ratio as a decimal, when you don't need an exact representation.
+    /// </summary>
+    /// <returns>decimal approximating the ratio</returns>
+    public double ToDecimal()
+    {
+        return Numerator / Denominator;
+    }
+
     public override bool Equals(object? obj)
     {
         var other = obj as Ratio;
