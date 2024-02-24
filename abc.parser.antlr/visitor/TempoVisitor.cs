@@ -8,14 +8,17 @@ namespace abc.parser.antlr.visitor;
 /// </summary>
 public class TempoVisitor : AbcHeaderBaseVisitor<TempoDefinition>
 {
-    public override TempoDefinition VisitFieldTempo([NotNull] AbcHeaderParser.FieldTempoContext context)
+    public override TempoDefinition VisitFieldTempo(
+        [NotNull] AbcHeaderParser.FieldTempoContext context
+    )
     {
         return Visit(context.tempoDef());
     }
 
     public override TempoDefinition VisitTempoDef([NotNull] AbcHeaderParser.TempoDefContext context)
     {
-        var fraction = new FractionVisitor().Visit(context.fraction()) ?? throw new ParseException(context);
+        var fraction =
+            new FractionVisitor().Visit(context.fraction()) ?? throw new ParseException(context);
         var bpm = int.Parse(context.INT().Symbol.Text);
         return new TempoDefinition(fraction, bpm);
     }

@@ -2,10 +2,14 @@
 using abc.parser.antlr.visitor;
 
 namespace abc.parser.antlr.test.header;
+
 internal class FractionVisitorTests
 {
     [Test]
-    public void ParsesFractions([Random(1, int.MaxValue, 5)] int numer, [Random(1, int.MaxValue, 5)] int denom)
+    public void ParsesFractions(
+        [Random(1, int.MaxValue, 5)] int numer,
+        [Random(1, int.MaxValue, 5)] int denom
+    )
     {
         var stringUnderTest = $"{numer}/{denom}";
         var parser = SetupHeaderHelpers.SetUpParser(stringUnderTest);

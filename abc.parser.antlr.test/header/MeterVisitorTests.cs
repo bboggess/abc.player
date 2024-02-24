@@ -2,6 +2,7 @@
 using Antlr4.Runtime.Misc;
 
 namespace abc.parser.antlr.test.header;
+
 public class MeterVisitorTests
 {
     [Test]
@@ -58,7 +59,10 @@ public class MeterVisitorTests
         var stringUnderTest = "M:D\n"; // arbitrary invalid meter specification
         var parser = SetupHeaderHelpers.SetUpParser(stringUnderTest);
 
-        var action = () => { _ = parser.fieldMeter(); };
+        var action = () =>
+        {
+            _ = parser.fieldMeter();
+        };
 
         Assert.That(action, Throws.InstanceOf<ParseCanceledException>());
     }

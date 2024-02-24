@@ -11,13 +11,16 @@ public partial class RequiredFieldsHeaderTests
     public void ParserErrorIfMissingTitle()
     {
         var headerWithoutTitle = """
-                                 X:1
-                                 K:C
-                                 
-                                 """;
+            X:1
+            K:C
+
+            """;
         var parser = SetupHeaderHelpers.SetUpParser(headerWithoutTitle);
 
-        var action = () => { _ = parser.tuneHeader(); };
+        var action = () =>
+        {
+            _ = parser.tuneHeader();
+        };
 
         Assert.That(action, Throws.InstanceOf<ParseCanceledException>());
     }
@@ -26,13 +29,16 @@ public partial class RequiredFieldsHeaderTests
     public void ParserErrorIfMissingKey()
     {
         var headerWithoutKey = """
-                                 X:1
-                                 T:Piece 1
-                                 
-                                 """;
+            X:1
+            T:Piece 1
+
+            """;
         var parser = SetupHeaderHelpers.SetUpParser(headerWithoutKey);
 
-        var action = () => { _ = parser.tuneHeader(); };
+        var action = () =>
+        {
+            _ = parser.tuneHeader();
+        };
 
         Assert.That(action, Throws.InstanceOf<ParseCanceledException>());
     }
@@ -41,13 +47,16 @@ public partial class RequiredFieldsHeaderTests
     public void ParserErrorIfMissingTrackNum()
     {
         var headerWithoutTrack = """
-                                 T:Piece 1
-                                 K:C
-                                 
-                                 """;
+            T:Piece 1
+            K:C
+
+            """;
         var parser = SetupHeaderHelpers.SetUpParser(headerWithoutTrack);
 
-        var action = () => { _ = parser.tuneHeader(); };
+        var action = () =>
+        {
+            _ = parser.tuneHeader();
+        };
 
         Assert.That(action, Throws.InstanceOf<ParseCanceledException>());
     }

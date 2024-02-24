@@ -44,10 +44,8 @@ public class Ratio
     /// </summary>
     /// <param name="top">The numerator</param>
     /// <param name="bottom">The denominator</param>
-    public Ratio(Ratio top, Ratio bottom) : this(top.Numerator * bottom.Denominator, top.Denominator * bottom.Numerator)
-    {
-
-    }
+    public Ratio(Ratio top, Ratio bottom)
+        : this(top.Numerator * bottom.Denominator, top.Denominator * bottom.Numerator) { }
 
     /// <summary>
     /// Returns the ratio as a decimal, when you don't need an exact representation.
@@ -63,7 +61,9 @@ public class Ratio
         var other = obj as Ratio;
 
         // Remember we do not simplify, so this is really just a straight equality check
-        return other is not null && Numerator == other.Numerator && Denominator == other.Denominator;
+        return other is not null
+            && Numerator == other.Numerator
+            && Denominator == other.Denominator;
     }
 
     public override int GetHashCode()

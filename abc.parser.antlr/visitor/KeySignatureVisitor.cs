@@ -13,10 +13,16 @@ public class KeySignatureVisitor : AbcHeaderBaseVisitor<KeySignature>
         return Visit(context.keySignature());
     }
 
-    public override KeySignature VisitKeySignature([NotNull] AbcHeaderParser.KeySignatureContext context)
+    public override KeySignature VisitKeySignature(
+        [NotNull] AbcHeaderParser.KeySignatureContext context
+    )
     {
-        var mode = context.modeKey() is null ? Mode.Major : new KeyModeVisitor().Visit(context.modeKey());
-        var accidental = context.accidentalKey() is null ? Accidental.Natural : new KeyAccidentalVisitor().Visit(context.accidentalKey());
+        var mode = context.modeKey() is null
+            ? Mode.Major
+            : new KeyModeVisitor().Visit(context.modeKey());
+        var accidental = context.accidentalKey() is null
+            ? Accidental.Natural
+            : new KeyAccidentalVisitor().Visit(context.accidentalKey());
         var basePitch = NoteFromText(context.note().GetText()) ?? throw new ParseException(context);
         return new KeySignature(new Note(basePitch, accidental), mode);
     }

@@ -11,14 +11,17 @@ public class OptionalFieldsHeaderTests
     public void NoParserErrorWhenNoOptionalFields()
     {
         var noOptionalFieldsHeader = """
-                                    X:1
-                                    T:Piece 1
-                                    K:C
+            X:1
+            T:Piece 1
+            K:C
 
-                                    """;
+            """;
         var parser = SetupHeaderHelpers.SetUpParser(noOptionalFieldsHeader);
 
-        var action = () => { _ = parser.tuneHeader(); };
+        var action = () =>
+        {
+            _ = parser.tuneHeader();
+        };
 
         Assert.That(action, Throws.Nothing);
     }

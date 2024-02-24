@@ -8,7 +8,9 @@ namespace abc.parser.antlr.visitor;
 /// </summary>
 public class IndexVisitor : AbcHeaderBaseVisitor<TrackIndex>
 {
-    public override TrackIndex VisitFieldNumber([NotNull] AbcHeaderParser.FieldNumberContext context)
+    public override TrackIndex VisitFieldNumber(
+        [NotNull] AbcHeaderParser.FieldNumberContext context
+    )
     {
         var index = int.Parse(context.INT().Symbol.Text);
         return new TrackIndex(index);

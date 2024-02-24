@@ -13,10 +13,7 @@ public class TempoDefinition
     /// </summary>
     public double QuarterNotePerMinute
     {
-        get
-        {
-            return ConvertBpmToPulse(new Ratio(1, 4));
-        }
+        get { return ConvertBpmToPulse(new Ratio(1, 4)); }
     }
 
     private double ConvertBpmToPulse(Ratio newPulse)

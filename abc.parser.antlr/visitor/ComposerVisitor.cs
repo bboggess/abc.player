@@ -8,7 +8,9 @@ namespace abc.parser.antlr.visitor;
 /// </summary>
 public class ComposerVisitor : AbcHeaderBaseVisitor<Composer>
 {
-    public override Composer VisitFieldComposer([NotNull] AbcHeaderParser.FieldComposerContext context)
+    public override Composer VisitFieldComposer(
+        [NotNull] AbcHeaderParser.FieldComposerContext context
+    )
     {
         var composerName = new FreeTextVisitor().Visit(context.text());
         return new Composer(composerName);

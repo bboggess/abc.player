@@ -8,12 +8,16 @@ namespace abc.parser.antlr.visitor;
 /// </summary>
 public class MeterVisitor : AbcHeaderBaseVisitor<TimeSignature>
 {
-    public override TimeSignature VisitFieldMeter([NotNull] AbcHeaderParser.FieldMeterContext context)
+    public override TimeSignature VisitFieldMeter(
+        [NotNull] AbcHeaderParser.FieldMeterContext context
+    )
     {
         return Visit(context.timeSignature());
     }
 
-    public override TimeSignature VisitCommonTime([NotNull] AbcHeaderParser.CommonTimeContext context)
+    public override TimeSignature VisitCommonTime(
+        [NotNull] AbcHeaderParser.CommonTimeContext context
+    )
     {
         return TimeSignature.FromCommonTime();
     }
@@ -23,9 +27,12 @@ public class MeterVisitor : AbcHeaderBaseVisitor<TimeSignature>
         return TimeSignature.FromCutTime();
     }
 
-    public override TimeSignature VisitFractionMeter([NotNull] AbcHeaderParser.FractionMeterContext context)
+    public override TimeSignature VisitFractionMeter(
+        [NotNull] AbcHeaderParser.FractionMeterContext context
+    )
     {
-        var fraction = new FractionVisitor().Visit(context.fraction()) ?? throw new ParseException(context);
+        var fraction =
+            new FractionVisitor().Visit(context.fraction()) ?? throw new ParseException(context);
         return TimeSignature.FromFractionalTime(fraction);
     }
 }

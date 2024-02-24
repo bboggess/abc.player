@@ -8,12 +8,13 @@ namespace abc.parser.antlr.test.body;
 internal class SetupBodyHelpers
 {
     private static readonly Func<ICharStream, AbcBodyLexer> LexerFactory = s => new AbcBodyLexer(s);
-    private static readonly Func<ITokenStream, AbcBodyParser> ParserFactory = s => new AbcBodyParser(s);
+    private static readonly Func<ITokenStream, AbcBodyParser> ParserFactory =
+        s => new AbcBodyParser(s);
 
     /// <summary>
     /// Builds up the parser from file content, allowing you to set up the
     /// parse tree at a smaller scope than the entire file.
-    /// 
+    ///
     /// You need to manually create a parse tree from here.
     /// </summary>
     /// <param name="testContent">
