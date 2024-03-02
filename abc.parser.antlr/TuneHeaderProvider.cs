@@ -25,10 +25,10 @@ public class TuneHeaderProvider : ITuneHeaderProvider
         _contextProvider = contextProvider;
     }
 
-    public TuneHeader GetTuneHeader()
+    public TuneHeader GetTuneHeader(IFieldDefaults defaults)
     {
         var context = _contextProvider.GetHeaderContext();
-        var builder = TuneHeader.Builder();
+        var builder = TuneHeader.Builder(defaults);
 
         var visitor = new FullHeaderVisitor(builder);
         return visitor.Visit(context).Build();

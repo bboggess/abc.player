@@ -62,9 +62,20 @@ public class TuneHeader
     /// </summary>
     public TempoDefinition Tempo { get; }
 
-    public static ITuneHeaderBuilder Builder()
+    /// <summary>
+    /// Providers a builder that can be used to construct a header one field at a time.
+    /// </summary>
+    /// <param name="defaults">Provides default values for optional fields.</param>
+    /// <returns>A builder that will use given defaults for unspecified, optional fields.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="defaults"/> is null</exception>
+    public static ITuneHeaderBuilder Builder(IFieldDefaults defaults)
     {
-        return new FieldBuilder();
+        if (defaults is null)
+        {
+            throw new ArgumentNullException(nameof(defaults));
+        }
+
+        return new FieldBuilder(defaults);
     }
 
     /// <summary>
@@ -74,6 +85,8 @@ public class TuneHeader
     /// </summary>
     private class FieldBuilder : ITuneHeaderBuilder
     {
+        private readonly IFieldDefaults _defaults;
+
         private TrackIndex? _index;
         private string? _title;
         private KeySignature? _key;
@@ -82,10 +95,19 @@ public class TuneHeader
         private TimeSignature? _meter;
         private TempoDefinition? _tempo;
 
-        internal FieldBuilder() { }
+        internal FieldBuilder(IFieldDefaults defaults)
+        {
+            if (defaults is null)
+            {
+                throw new ArgumentNullException(nameof(defaults));
+            }
+
+            _defaults = defaults;
+        }
 
         private FieldBuilder(FieldBuilder other)
         {
+            _defaults = other._defaults;
             _index = other._index;
             _title = other._title;
             _key = other._key;
@@ -102,13 +124,13 @@ public class TuneHeader
         private KeySignature KeySignature =>
             _key ?? throw new RequiredFieldException(nameof(KeySignature));
 
-        private Composer Composer => _composer ?? new Composer("Unknown");
+        private Composer Composer => _composer ?? _defaults.DefaultComposer;
 
-        private Ratio BaseNoteLength => _baseNoteLength ?? new Ratio(1, 8);
+        private Ratio BaseNoteLength => _baseNoteLength ?? _defaults.DefaultBaseNoteLength;
 
-        private TimeSignature Meter => _meter ?? TimeSignature.FromCommonTime();
+        private TimeSignature Meter => _meter ?? _defaults.DefaultMeter;
 
-        private TempoDefinition Tempo => _tempo ?? new TempoDefinition(BaseNoteLength, 100);
+        private TempoDefinition Tempo => _tempo ?? _defaults.DefaultTempo;
 
         public ITuneHeaderBuilder WithTrackIndex(TrackIndex index)
         {
