@@ -8,29 +8,39 @@ namespace abc.parser.antlr;
 /// </summary>
 public class TuneHeaderProvider : ITuneHeaderProvider
 {
+    private readonly ITuneHeaderBuilder _builder;
     private readonly IHeaderContextProvider _contextProvider;
 
     /// <summary>
     /// Constructs our provider from the context of a header parse tree.
     /// </summary>
+    /// <param name="headerBuilder">Builder object for our header, used to set fields as we come across them.</param>
     /// <param name="contextProvider">The parsing context for the source of the header, e.g. from a file</param>
-    /// <exception cref="ArgumentNullException"><paramref name="contextProvider"/> is null</exception>
-    public TuneHeaderProvider(IHeaderContextProvider contextProvider)
+    /// <exception cref="ArgumentNullException">either argument is null</exception>
+    public TuneHeaderProvider(
+        ITuneHeaderBuilder headerBuilder,
+        IHeaderContextProvider contextProvider
+    )
     {
+        if (headerBuilder == null)
+        {
+            throw new ArgumentNullException(nameof(headerBuilder));
+        }
+
         if (contextProvider is null)
         {
             throw new ArgumentNullException(nameof(contextProvider));
         }
 
+        _builder = headerBuilder;
         _contextProvider = contextProvider;
     }
 
-    public TuneHeader GetTuneHeader(IFieldDefaults defaults)
+    public TuneHeader GetTuneHeader()
     {
         var context = _contextProvider.GetHeaderContext();
-        var builder = TuneHeader.Builder(defaults);
 
-        var visitor = new FullHeaderVisitor(builder);
+        var visitor = new FullHeaderVisitor(_builder);
         return visitor.Visit(context).Build();
     }
 }
