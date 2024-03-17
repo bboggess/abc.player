@@ -13,12 +13,28 @@ public enum Accidental
 /// </summary>
 public class KeyTonic
 {
-    public NaturalNote BaseNote { get; }
+    public NaturalNote BaseNaturalNote { get; }
     public Accidental Accidental { get; }
+
+    /// <summary>
+    /// Returns the tonic as a <see cref="BaseNote"/>. This throws away information
+    /// about flats vs sharps, so is not always what you want.
+    /// </summary>
+    public BaseNote TonicPitch => (BaseNote)(((int)BaseNaturalNote + GetAccidentalModifier()) % 12);
+
+    private int GetAccidentalModifier()
+    {
+        return Accidental switch
+        {
+            Accidental.Flat => -1,
+            Accidental.Sharp => 1,
+            _ => 0,
+        };
+    }
 
     public KeyTonic(NaturalNote note, Accidental accidental)
     {
-        BaseNote = note;
+        BaseNaturalNote = note;
         Accidental = accidental;
     }
 }

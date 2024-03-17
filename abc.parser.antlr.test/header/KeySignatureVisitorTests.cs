@@ -45,7 +45,7 @@ public class KeySignatureVisitorTests
         Assert.Multiple(() =>
         {
             Assert.That(outcome, Is.Not.Null);
-            Assert.That(outcome.Tonic.BaseNote, Is.EqualTo(NoteMap[note]));
+            Assert.That(outcome.Tonic.BaseNaturalNote, Is.EqualTo(NoteMap[note]));
             Assert.That(outcome.Tonic.Accidental, Is.EqualTo(AccidentalMap[accidental]));
             Assert.That(outcome.Mode, Is.EqualTo(ModeMap[mode]));
         });

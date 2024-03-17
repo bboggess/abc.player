@@ -6,6 +6,8 @@
 /// </summary>
 public class Pitch
 {
+    internal const int NumChromaticNotes = 12;
+
     // using MIDI values to represent pitch
     private const int _middleC = 60;
     private const int _minMidiValue = 0;
@@ -22,7 +24,7 @@ public class Pitch
     /// E.g., to describe the A below middle C, pass in 0 here.
     /// </param>
     public Pitch(BaseNote note, int octaveFromMiddleC)
-        : this(_middleC + octaveFromMiddleC * 12 + ((int)note - (int)BaseNote.C)) { }
+        : this(_middleC + octaveFromMiddleC * NumChromaticNotes + ((int)note - (int)BaseNote.C)) { }
 
     private Pitch(int noteValue)
     {
@@ -33,6 +35,8 @@ public class Pitch
 
         _midiValue = noteValue;
     }
+
+    public BaseNote NamedNote => (BaseNote)((_midiValue - (int)BaseNote.C) % NumChromaticNotes);
 
     /// <summary>
     /// Adjust a pitch up or down by specified number of half steps.
