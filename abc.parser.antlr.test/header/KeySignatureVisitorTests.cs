@@ -6,16 +6,16 @@ namespace abc.parser.antlr.test.header;
 
 public class KeySignatureVisitorTests
 {
-    private static readonly Dictionary<string, BaseNote> NoteMap =
+    private static readonly Dictionary<string, NaturalNote> NoteMap =
         new()
         {
-            { "A", BaseNote.A },
-            { "B", BaseNote.B },
-            { "C", BaseNote.C },
-            { "D", BaseNote.D },
-            { "E", BaseNote.E },
-            { "F", BaseNote.F },
-            { "G", BaseNote.G },
+            { "A", NaturalNote.A },
+            { "B", NaturalNote.B },
+            { "C", NaturalNote.C },
+            { "D", NaturalNote.D },
+            { "E", NaturalNote.E },
+            { "F", NaturalNote.F },
+            { "G", NaturalNote.G },
         };
 
     private static readonly Dictionary<string, Accidental> AccidentalMap =

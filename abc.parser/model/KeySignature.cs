@@ -11,10 +11,10 @@ public enum Mode
 /// </summary>
 public class KeySignature
 {
-    public Note Tonic { get; }
+    public KeyTonic Tonic { get; }
     public Mode Mode { get; }
 
-    public KeySignature(Note tonic, Mode mode)
+    public KeySignature(KeyTonic tonic, Mode mode)
     {
         Tonic = tonic;
         Mode = mode;

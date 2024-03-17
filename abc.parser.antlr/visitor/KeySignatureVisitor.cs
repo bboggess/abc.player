@@ -24,20 +24,20 @@ public class KeySignatureVisitor : AbcHeaderBaseVisitor<KeySignature>
             ? Accidental.Natural
             : new KeyAccidentalVisitor().Visit(context.accidentalKey());
         var basePitch = NoteFromText(context.note().GetText()) ?? throw new ParseException(context);
-        return new KeySignature(new Note(basePitch, accidental), mode);
+        return new KeySignature(new KeyTonic(basePitch, accidental), mode);
     }
 
-    private static BaseNote? NoteFromText(string s)
+    private static NaturalNote? NoteFromText(string s)
     {
         return s switch
         {
-            "A" => BaseNote.A,
-            "B" => BaseNote.B,
-            "C" => BaseNote.C,
-            "D" => BaseNote.D,
-            "E" => BaseNote.E,
-            "F" => BaseNote.F,
-            "G" => BaseNote.G,
+            "A" => NaturalNote.A,
+            "B" => NaturalNote.B,
+            "C" => NaturalNote.C,
+            "D" => NaturalNote.D,
+            "E" => NaturalNote.E,
+            "F" => NaturalNote.F,
+            "G" => NaturalNote.G,
             _ => null,
         };
     }
