@@ -30,6 +30,6 @@ internal class KeyAccidentalCorrector : IPitchAdjuster
 
     public Pitch AdjustPitch(Pitch pitch)
     {
-        return _accidentals.Contains(pitch.NamedNote) ? pitch.Adjust(_pitchAdjustment) : pitch;
+        return _accidentals.Contains(pitch.ChromaticNote) ? pitch.Adjust(_pitchAdjustment) : pitch;
     }
 }

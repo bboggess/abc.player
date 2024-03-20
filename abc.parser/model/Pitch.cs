@@ -1,4 +1,6 @@
-﻿namespace abc.parser.model;
+﻿using System.Runtime.CompilerServices;
+
+namespace abc.parser.model;
 
 /// <summary>
 /// Represents a pitch that can be played, without reference to how long it should be
@@ -6,8 +8,6 @@
 /// </summary>
 public class Pitch
 {
-    internal const int NumChromaticNotes = 12;
-
     // using MIDI values to represent pitch
     private const int _middleC = 60;
     private const int _minMidiValue = 0;
@@ -24,7 +24,11 @@ public class Pitch
     /// E.g., to describe the A below middle C, pass in 0 here.
     /// </param>
     public Pitch(BaseNote note, int octaveFromMiddleC)
-        : this(_middleC + octaveFromMiddleC * NumChromaticNotes + ((int)note - (int)BaseNote.C)) { }
+        : this(
+            _middleC
+                + octaveFromMiddleC * BaseNote.NumChromaticNotes
+                + note.DistanceFrom(BaseNote.C)
+        ) { }
 
     private Pitch(int noteValue)
     {
@@ -36,42 +40,19 @@ public class Pitch
         _midiValue = noteValue;
     }
 
-    public BaseNote NamedNote => (BaseNote)((_midiValue - (int)BaseNote.C) % NumChromaticNotes);
+    /// <summary>
+    /// Represents the note from the chromatic scale underlying this pitch. Basically,
+    /// this throws away octave information.
+    /// </summary>
+    public BaseNote ChromaticNote => BaseNote.C.Transpose(_midiValue - _middleC);
 
     /// <summary>
     /// Adjust a pitch up or down by specified number of half steps.
     /// </summary>
-    /// <param name="numHalfSteps">Number of half steps to adjust. Negative means flatten.</param>
-    /// <returns>A new Pitch <paramref name="numHalfSteps"/> half steps from this one</returns>
-    public Pitch Adjust(int numHalfSteps)
+    /// <param name="numSemitones">Number of half steps to adjust. Negative means flatten.</param>
+    /// <returns>A new Pitch <paramref name="numSemitones"/> half steps from this one</returns>
+    public Pitch Adjust(int numSemitones)
     {
-        return new Pitch(_midiValue + numHalfSteps);
+        return new Pitch(_midiValue + numSemitones);
     }
-}
-
-public enum BaseNote
-{
-    A = 0,
-    ASharp = 1,
-    B = 2,
-    C = 3,
-    CSharp = 4,
-    D = 5,
-    DSharp = 6,
-    E = 7,
-    F = 8,
-    FSharp = 9,
-    G = 10,
-    GSharp = 11,
-}
-
-public enum NaturalNote
-{
-    A = BaseNote.A,
-    B = BaseNote.B,
-    C = BaseNote.C,
-    D = BaseNote.D,
-    E = BaseNote.E,
-    F = BaseNote.F,
-    G = BaseNote.G,
 }

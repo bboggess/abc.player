@@ -33,7 +33,9 @@ public class KeySignature
     public IPitchAdjuster ToAccidentalCorrector()
     {
         var counter = AccidentalCounterFactory.GetAccidentalCounter(Mode, Tonic.Accidental);
-        var result = counter.CountAccidentals(Tonic.TonicPitch);
+        var result = counter.CountAccidentals(
+            Tonic.BaseNaturalNote.ApplyAccidental(Tonic.Accidental)
+        );
 
         if (!result.TryGetValue(out AccidentalCount? count))
         {

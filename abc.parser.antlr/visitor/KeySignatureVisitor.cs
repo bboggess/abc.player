@@ -23,23 +23,8 @@ public class KeySignatureVisitor : AbcHeaderBaseVisitor<KeySignature>
         var accidental = context.accidentalKey() is null
             ? Accidental.Natural
             : new KeyAccidentalVisitor().Visit(context.accidentalKey());
-        var basePitch = NoteFromText(context.note().GetText()) ?? throw new ParseException(context);
+        var basePitch = BaseNote.FromChar(context.note().GetText().First());
         return new KeySignature(new KeyTonic(basePitch, accidental), mode);
-    }
-
-    private static NaturalNote? NoteFromText(string s)
-    {
-        return s switch
-        {
-            "A" => NaturalNote.A,
-            "B" => NaturalNote.B,
-            "C" => NaturalNote.C,
-            "D" => NaturalNote.D,
-            "E" => NaturalNote.E,
-            "F" => NaturalNote.F,
-            "G" => NaturalNote.G,
-            _ => null,
-        };
     }
 }
 

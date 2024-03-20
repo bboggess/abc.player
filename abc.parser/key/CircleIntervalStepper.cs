@@ -26,7 +26,7 @@ internal class CircleIntervalStepper
 
     public BaseNote Next(BaseNote cur)
     {
-        return (BaseNote)(((int)cur + _interval) % Pitch.NumChromaticNotes);
+        return cur.Transpose(_interval);
     }
 
     public static CircleIntervalStepper PerfectFifthStepper()

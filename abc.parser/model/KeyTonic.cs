@@ -13,27 +13,27 @@ public enum Accidental
 /// </summary>
 public class KeyTonic
 {
-    public NaturalNote BaseNaturalNote { get; }
+    public BaseNote BaseNaturalNote { get; }
     public Accidental Accidental { get; }
 
     /// <summary>
-    /// Returns the tonic as a <see cref="BaseNote"/>. This throws away information
-    /// about flats vs sharps, so is not always what you want.
+    /// Builds a Tonic by specifying the natural piece and accidental piece separately.
+    ///
+    /// E.g., to describe F#, you'd pass in BaseNote.F and Accidental.Sharp.
     /// </summary>
-    public BaseNote TonicPitch => (BaseNote)(((int)BaseNaturalNote + GetAccidentalModifier()) % 12);
-
-    private int GetAccidentalModifier()
+    /// <param name="note">This needs to be a natural note.</param>
+    /// <param name="accidental">Applies an accidental to <paramref name="note"/> (or natural to use no accidental)</param>
+    /// <exception cref="ArgumentException"><paramref name="note"/> is not natural</exception>
+    public KeyTonic(BaseNote note, Accidental accidental)
     {
-        return Accidental switch
+        if (!note.IsNatural)
         {
-            Accidental.Flat => -1,
-            Accidental.Sharp => 1,
-            _ => 0,
-        };
-    }
+            throw new ArgumentException(
+                $"Must provide a natural note, received {note}",
+                nameof(note)
+            );
+        }
 
-    public KeyTonic(NaturalNote note, Accidental accidental)
-    {
         BaseNaturalNote = note;
         Accidental = accidental;
     }
