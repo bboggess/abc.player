@@ -55,4 +55,23 @@ public class Optional<TVal>
         value = HasData ? _value! : default;
         return HasData;
     }
+
+    /// <summary>
+    /// Applies a fallible function to our type if it has a value, flattening out Nones.
+    /// </summary>
+    /// <typeparam name="TOut">Type to transform our data into</typeparam>
+    /// <param name="func">Function to apply to value, if we have one</param>
+    /// <returns>
+    /// None if this is None or <paramref name="func"/> returns None.
+    /// Otherwise holds value of <paramref name="func"/> applied to data
+    /// </returns>
+    public Optional<TOut> Bind<TOut>(Func<TVal, Optional<TOut>> func)
+    {
+        if (!HasData)
+        {
+            return Optional<TOut>.None();
+        }
+
+        return func(_value!);
+    }
 }

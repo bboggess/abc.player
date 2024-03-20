@@ -22,19 +22,12 @@ internal class NonzeroAccidentalCounter : IAccidentalCounter
 
     public Optional<AccidentalCount> CountAccidentals(BaseNote tonic)
     {
-        var originalResult = _counter.CountAccidentals(tonic);
-
-        if (originalResult.TryGetValue(out AccidentalCount? val))
-        {
-            var count = val!.NumAccidentals;
-
-            if (count == 0)
-            {
-                return Optional<AccidentalCount>.None();
-            }
-        }
-
-        // if we got a count other than 0 accidentals, don't modify
-        return originalResult;
+        return _counter
+            .CountAccidentals(tonic)
+            .Bind(count =>
+                count.NumAccidentals > 0
+                    ? Optional<AccidentalCount>.Some(count)
+                    : Optional<AccidentalCount>.None()
+            );
     }
 }
