@@ -51,7 +51,7 @@ public class Pitch
     /// </summary>
     /// <param name="numSemitones">Number of half steps to adjust. Negative means flatten.</param>
     /// <returns>A new Pitch <paramref name="numSemitones"/> half steps from this one</returns>
-    public Pitch Adjust(int numSemitones)
+    public Pitch Transpose(int numSemitones)
     {
         return new Pitch(_midiValue + numSemitones);
     }
