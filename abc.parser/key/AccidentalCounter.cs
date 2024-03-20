@@ -39,7 +39,7 @@ internal class AccidentalCounter : IAccidentalCounter
         // if we hit that point
         while (numAccidentals < 8)
         {
-            if (cur == tonic)
+            if (cur.Equals(tonic))
             {
                 var count = new AccidentalCount(numAccidentals, _accidental);
                 return Optional<AccidentalCount>.Some(count);

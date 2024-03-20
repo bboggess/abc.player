@@ -55,4 +55,19 @@ public class Pitch
     {
         return new Pitch(_midiValue + numSemitones);
     }
+
+    public override bool Equals(object? obj)
+    {
+        if (obj is Pitch other)
+        {
+            return other._midiValue == _midiValue;
+        }
+
+        return false;
+    }
+
+    public override int GetHashCode()
+    {
+        return _midiValue;
+    }
 }
