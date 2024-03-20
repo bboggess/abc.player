@@ -20,9 +20,13 @@ internal static class AccidentalCounterFactory
                 => accidental switch
                 {
                     Accidental.Sharp
-                        => new AccidentalCounter(new MajorSharpStepper(), AccidentalType.Sharp),
+                        => new NonzeroAccidentalCounter(
+                            new AccidentalCounter(new MajorSharpStepper(), AccidentalType.Sharp)
+                        ),
                     Accidental.Flat
-                        => new AccidentalCounter(new MajorFlatStepper(), AccidentalType.Flat),
+                        => new NonzeroAccidentalCounter(
+                            new AccidentalCounter(new MajorFlatStepper(), AccidentalType.Flat)
+                        ),
                     Accidental.Natural
                         => new CompositeAccidentalCounter(
                             new List<IAccidentalCounter>()
@@ -40,9 +44,13 @@ internal static class AccidentalCounterFactory
                 => accidental switch
                 {
                     Accidental.Sharp
-                        => new AccidentalCounter(new MinorSharpStepper(), AccidentalType.Sharp),
+                        => new NonzeroAccidentalCounter(
+                            new AccidentalCounter(new MinorSharpStepper(), AccidentalType.Sharp)
+                        ),
                     Accidental.Flat
-                        => new AccidentalCounter(new MinorFlatStepper(), AccidentalType.Flat),
+                        => new NonzeroAccidentalCounter(
+                            new AccidentalCounter(new MinorFlatStepper(), AccidentalType.Flat)
+                        ),
                     Accidental.Natural
                         => new CompositeAccidentalCounter(
                             new List<IAccidentalCounter>()
