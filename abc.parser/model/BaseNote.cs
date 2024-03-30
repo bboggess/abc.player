@@ -25,7 +25,7 @@ public class BaseNote
 
     private BaseNote(int value)
     {
-        _value = (value % 12 + 12) % 12;
+        _value = (value % NumChromaticNotes + NumChromaticNotes) % NumChromaticNotes;
     }
 
     /// <summary>
