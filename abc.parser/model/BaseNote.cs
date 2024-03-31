@@ -119,4 +119,9 @@ public class BaseNote
             _ => throw new ArgumentOutOfRangeException(nameof(c)),
         };
     }
+
+    public static IEnumerable<BaseNote> AllNotes()
+    {
+        return new[] { A, ASharp, B, C, CSharp, D, DSharp, E, F, FSharp, G, GSharp };
+    }
 }
