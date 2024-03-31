@@ -66,6 +66,11 @@ public class Pitch
         return false;
     }
 
+    public override string ToString()
+    {
+        return _midiValue.ToString(); // this is enough for debugging
+    }
+
     public override int GetHashCode()
     {
         return _midiValue;
