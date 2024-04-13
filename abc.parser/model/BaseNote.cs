@@ -103,11 +103,11 @@ public class BaseNote
     /// Constructs a (natural) note from the name of the note. Will never return
     /// anything with accidentals.
     /// </summary>
-    /// <param name="c">The name of the note, e.g. 'A', 'B', etc.</param>
+    /// <param name="c">The name of the note, e.g. 'A', 'B', etc. This is case-insensitive.</param>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="c"/> is not a valid note name</exception>
     public static BaseNote FromChar(char c)
     {
-        return c switch
+        return char.ToUpper(c) switch
         {
             'A' => A,
             'B' => B,
