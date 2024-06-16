@@ -134,7 +134,7 @@ public class TuneBodyListenerTests
                     It.Is<BodyNoteEvent>(e =>
                         e.Length.Numerator == null
                         && e.Length.Denominator == null
-                        && !e.Length.UseDefaultDenominator
+                        && !e.Length.IsSpecifiedDenominator
                     )
                 ),
             Times.Once
@@ -160,7 +160,7 @@ public class TuneBodyListenerTests
                     It.Is<BodyRestEvent>(e =>
                         e.Length.Numerator == null
                         && e.Length.Denominator == null
-                        && !e.Length.UseDefaultDenominator
+                        && !e.Length.IsSpecifiedDenominator
                     )
                 ),
             Times.Once
@@ -186,7 +186,7 @@ public class TuneBodyListenerTests
                     It.Is<BodyNoteEvent>(e =>
                         e.Length.Numerator == null
                         && e.Length.Denominator == null
-                        && e.Length.UseDefaultDenominator
+                        && e.Length.IsSpecifiedDenominator
                     )
                 ),
             Times.Once
@@ -212,7 +212,7 @@ public class TuneBodyListenerTests
                     It.Is<BodyNoteEvent>(e =>
                         e.Length.Numerator == 2
                         && e.Length.Denominator == null
-                        && !e.Length.UseDefaultDenominator
+                        && !e.Length.IsSpecifiedDenominator
                     )
                 ),
             Times.Once
@@ -238,7 +238,7 @@ public class TuneBodyListenerTests
                     It.Is<BodyNoteEvent>(e =>
                         e.Length.Numerator == null
                         && e.Length.Denominator == 2
-                        && e.Length.UseDefaultDenominator
+                        && e.Length.IsSpecifiedDenominator
                     )
                 ),
             Times.Once
@@ -266,7 +266,7 @@ public class TuneBodyListenerTests
                     It.Is<BodyNoteEvent>(e =>
                         e.Length.Numerator == 2
                         && e.Length.Denominator == null
-                        && e.Length.UseDefaultDenominator
+                        && e.Length.IsSpecifiedDenominator
                     )
                 ),
             Times.Once
@@ -294,7 +294,7 @@ public class TuneBodyListenerTests
                     It.Is<BodyNoteEvent>(e =>
                         e.Length.Numerator == 1
                         && e.Length.Denominator == 4
-                        && e.Length.UseDefaultDenominator
+                        && e.Length.IsSpecifiedDenominator
                     )
                 ),
             Times.Once

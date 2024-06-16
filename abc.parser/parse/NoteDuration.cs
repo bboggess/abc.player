@@ -14,5 +14,5 @@ public class NoteDuration
     /// Specifies that the default denominator was specified, rather than
     /// no denominator at all.
     /// </summary>
-    public bool UseDefaultDenominator { get; set; }
+    public bool IsSpecifiedDenominator { get; set; }
 }

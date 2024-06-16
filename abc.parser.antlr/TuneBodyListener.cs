@@ -91,7 +91,7 @@ public class TuneBodyListener : AbcBaseListener
         var numeratorText = pieces.FirstOrDefault();
         var denominatorText = includesSlash ? pieces.LastOrDefault() : string.Empty;
 
-        var duration = new NoteDuration { UseDefaultDenominator = includesSlash };
+        var duration = new NoteDuration { IsSpecifiedDenominator = includesSlash };
 
         if (!string.IsNullOrEmpty(numeratorText))
         {
