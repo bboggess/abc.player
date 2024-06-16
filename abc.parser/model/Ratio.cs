@@ -47,6 +47,11 @@ public class Ratio
     public Ratio(Ratio top, Ratio bottom)
         : this(top.Numerator * bottom.Denominator, top.Denominator * bottom.Numerator) { }
 
+    public Ratio Multiply(Ratio other)
+    {
+        return new Ratio(Numerator * other.Numerator, Denominator * other.Denominator);
+    }
+
     /// <summary>
     /// Returns the ratio as a decimal, when you don't need an exact representation.
     /// </summary>
