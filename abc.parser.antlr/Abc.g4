@@ -43,7 +43,9 @@ text : (~NEWLINE)+ ;
 /**
  * Body rules begin here
  */
-tuneBody : note* ;
+tuneBody : element* ;
+
+element : note | WS ;
 
 note : pitchOrRest noteLength ;
 
@@ -63,4 +65,5 @@ baseNote : 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g'
  */
 INT : [1-9] [0-9]* ;
 NEWLINE : '\r'? '\n' | '\r' ;
+WS : [ \t\r\n]  ;
 ANY : . ;
