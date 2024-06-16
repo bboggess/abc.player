@@ -12,15 +12,15 @@ abcTune : tuneHeader tuneBody ;
  */
 tuneHeader : fieldNumber fieldTitle optionalField* fieldKey ;
 
-fieldNumber : 'X:' INT NEWLINE ;
-fieldTitle : 'T:' text NEWLINE ;
-fieldKey : 'K:' keySignature NEWLINE ;
+fieldNumber : 'X:' WS* INT NEWLINE ;
+fieldTitle : 'T:' WS* text NEWLINE ;
+fieldKey : 'K:' WS* keySignature NEWLINE ;
 
 optionalField : fieldComposer | fieldLength | fieldMeter | fieldTempo ;
-fieldComposer : 'C:' text NEWLINE ;
-fieldLength : 'L:' fraction NEWLINE ;
-fieldMeter : 'M:' timeSignature NEWLINE ;
-fieldTempo : 'Q:' tempoDef NEWLINE ;
+fieldComposer : 'C:' WS* text NEWLINE ;
+fieldLength : 'L:' WS* fraction NEWLINE ;
+fieldMeter : 'M:' WS* timeSignature NEWLINE ;
+fieldTempo : 'Q:' WS* tempoDef NEWLINE ;
 
 keySignature : keyNote (accidentalKey)? (modeKey)? ;
 accidentalKey : '#'		# Sharp
@@ -45,7 +45,7 @@ text : (~NEWLINE)+ ;
  */
 tuneBody : element* ;
 
-element : note | WS ;
+element : note | WS | NEWLINE ;
 
 note : pitchOrRest noteLength ;
 
@@ -64,6 +64,6 @@ baseNote : 'a' | 'b' | 'c' | 'd' | 'e' | 'f' | 'g'
  * Generic fields, tokens, etc.
  */
 INT : [1-9] [0-9]* ;
+WS : [ \t] ;
 NEWLINE : '\r'? '\n' | '\r' ;
-WS : [ \t\r\n]  ;
 ANY : . ;
