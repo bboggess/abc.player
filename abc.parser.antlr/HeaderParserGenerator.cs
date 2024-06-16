@@ -32,11 +32,11 @@ public class HeaderParserGenerator : IHeaderContextProvider
         _errorStrategy = errorStrategy;
     }
 
-    public AbcHeaderParser.TuneHeaderContext GetHeaderContext()
+    public AbcParser.TuneHeaderContext GetHeaderContext()
     {
-        var lexer = new AbcHeaderLexer(_charStream);
+        var lexer = new AbcLexer(_charStream);
         var tokens = new CommonTokenStream(lexer);
-        var parser = new AbcHeaderParser(tokens) { ErrorHandler = _errorStrategy };
+        var parser = new AbcParser(tokens) { ErrorHandler = _errorStrategy };
 
         return parser.tuneHeader();
     }

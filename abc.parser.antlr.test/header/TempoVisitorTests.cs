@@ -9,7 +9,7 @@ public class TempoVisitorTests
     public void QuarterNoteBpm()
     {
         var stringUnderTest = $"Q:1/4=120\n";
-        var parser = SetupHeaderHelpers.SetUpParser(stringUnderTest);
+        var parser = SetupHelpers.SetUpParser(stringUnderTest);
         var visitor = new TempoVisitor();
 
         var tempoDef = visitor.Visit(parser.fieldTempo());
@@ -21,7 +21,7 @@ public class TempoVisitorTests
     public void HalfNoteBpm()
     {
         var stringUnderTest = $"Q:1/2=60\n";
-        var parser = SetupHeaderHelpers.SetUpParser(stringUnderTest);
+        var parser = SetupHelpers.SetUpParser(stringUnderTest);
         var visitor = new TempoVisitor();
 
         var tempoDef = visitor.Visit(parser.fieldTempo());
@@ -33,7 +33,7 @@ public class TempoVisitorTests
     public void ParserErrorIfNoBeatSpecified([Random(5)] int bpm)
     {
         var missingBeat = $"Q:{bpm}\n";
-        var parser = SetupHeaderHelpers.SetUpParser(missingBeat);
+        var parser = SetupHelpers.SetUpParser(missingBeat);
         var visitor = new TempoVisitor();
 
         var action = () => visitor.Visit(parser.fieldTempo());
@@ -45,7 +45,7 @@ public class TempoVisitorTests
     public void ParserErrorIfNoFraction([Random(3)] int beat, [Random(3)] int bpm)
     {
         var malformedPulse = $"Q:{beat}={bpm}\n";
-        var parser = SetupHeaderHelpers.SetUpParser(malformedPulse);
+        var parser = SetupHelpers.SetUpParser(malformedPulse);
         var visitor = new TempoVisitor();
 
         var action = () => visitor.Visit(parser.fieldTempo());
@@ -57,7 +57,7 @@ public class TempoVisitorTests
     public void ParserErrorIfNoBpm([Random(3)] int numer, [Random(3)] int denom)
     {
         var noBpm = $"Q:{numer}/{denom}\n";
-        var parser = SetupHeaderHelpers.SetUpParser(noBpm);
+        var parser = SetupHelpers.SetUpParser(noBpm);
         var visitor = new TempoVisitor();
 
         var action = () => visitor.Visit(parser.fieldTempo());

@@ -9,7 +9,7 @@ public class IndexVisitorTests
     public void AcceptsNumericIndex([Random(10)] int index)
     {
         var stringUnderTest = $"X:{index}\n";
-        var parser = SetupHeaderHelpers.SetUpParser(stringUnderTest);
+        var parser = SetupHelpers.SetUpParser(stringUnderTest);
         var visitor = new IndexVisitor();
 
         var outcome = visitor.Visit(parser.fieldNumber());
@@ -21,7 +21,7 @@ public class IndexVisitorTests
     public void RejectsNonNumericIndex()
     {
         var stringUnderTest = "X:index\n";
-        var parser = SetupHeaderHelpers.SetUpParser(stringUnderTest);
+        var parser = SetupHelpers.SetUpParser(stringUnderTest);
         var visitor = new IndexVisitor();
 
         var action = () => visitor.Visit(parser.fieldNumber());

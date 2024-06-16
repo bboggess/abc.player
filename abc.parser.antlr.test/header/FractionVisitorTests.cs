@@ -12,7 +12,7 @@ internal class FractionVisitorTests
     )
     {
         var stringUnderTest = $"{numer}/{denom}";
-        var parser = SetupHeaderHelpers.SetUpParser(stringUnderTest);
+        var parser = SetupHelpers.SetUpParser(stringUnderTest);
         var visitor = new FractionVisitor();
 
         var outcome = visitor.Visit(parser.fraction());

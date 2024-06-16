@@ -16,7 +16,7 @@ public class OptionalFieldsHeaderTests
             K:C
 
             """;
-        var parser = SetupHeaderHelpers.SetUpParser(noOptionalFieldsHeader);
+        var parser = SetupHelpers.SetUpParser(noOptionalFieldsHeader);
 
         var action = () =>
         {

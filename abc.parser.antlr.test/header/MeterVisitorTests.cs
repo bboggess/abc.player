@@ -9,7 +9,7 @@ public class MeterVisitorTests
     public void HandlesCommonTime()
     {
         var stringUnderTest = "M:C\n";
-        var parser = SetupHeaderHelpers.SetUpParser(stringUnderTest);
+        var parser = SetupHelpers.SetUpParser(stringUnderTest);
         var visitor = new MeterVisitor();
 
         var outcome = visitor.Visit(parser.fieldMeter());
@@ -25,7 +25,7 @@ public class MeterVisitorTests
     public void HandlesCutTime()
     {
         var stringUnderTest = "M:C|\n";
-        var parser = SetupHeaderHelpers.SetUpParser(stringUnderTest);
+        var parser = SetupHelpers.SetUpParser(stringUnderTest);
         var visitor = new MeterVisitor();
 
         var outcome = visitor.Visit(parser.fieldMeter());
@@ -41,7 +41,7 @@ public class MeterVisitorTests
     public void HandlesFractionalTime([Random(1, 32, 5)] int top, [Random(1, 32, 5)] int bottom)
     {
         var stringUnderTest = $"M:{top}/{bottom}\n";
-        var parser = SetupHeaderHelpers.SetUpParser(stringUnderTest);
+        var parser = SetupHelpers.SetUpParser(stringUnderTest);
         var visitor = new MeterVisitor();
 
         var outcome = visitor.Visit(parser.fieldMeter());
@@ -57,7 +57,7 @@ public class MeterVisitorTests
     public void HandleBadData()
     {
         var stringUnderTest = "M:D\n"; // arbitrary invalid meter specification
-        var parser = SetupHeaderHelpers.SetUpParser(stringUnderTest);
+        var parser = SetupHelpers.SetUpParser(stringUnderTest);
 
         var action = () =>
         {

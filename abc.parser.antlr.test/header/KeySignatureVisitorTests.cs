@@ -37,7 +37,7 @@ public class KeySignatureVisitorTests
     )
     {
         var stringUnderTest = $"K:{note}{accidental}{mode}\n";
-        var parser = SetupHeaderHelpers.SetUpParser(stringUnderTest);
+        var parser = SetupHelpers.SetUpParser(stringUnderTest);
         var visitor = new KeySignatureVisitor();
 
         var outcome = visitor.Visit(parser.fieldKey());
@@ -78,7 +78,7 @@ public class KeySignatureVisitorTests
     )
     {
         var stringUnderTest = $"K:{key}\n";
-        var parser = SetupHeaderHelpers.SetUpParser(key);
+        var parser = SetupHelpers.SetUpParser(key);
         var visitor = new KeySignatureVisitor();
 
         var action = () => visitor.Visit(parser.fieldKey());
@@ -90,7 +90,7 @@ public class KeySignatureVisitorTests
     public void ParserErrorOnInvalidMode([Values("p", "~", "dim", "3")] string mode)
     {
         var invalidModeHeader = $"K:C{mode}\n";
-        var parser = SetupHeaderHelpers.SetUpParser(invalidModeHeader);
+        var parser = SetupHelpers.SetUpParser(invalidModeHeader);
         var visitor = new KeySignatureVisitor();
 
         var action = () => visitor.Visit(parser.fieldKey());

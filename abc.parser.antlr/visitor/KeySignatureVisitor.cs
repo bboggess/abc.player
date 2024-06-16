@@ -6,16 +6,14 @@ namespace abc.parser.antlr.visitor;
 /// <summary>
 /// Parse the key signature from an ABC header.
 /// </summary>
-public class KeySignatureVisitor : AbcHeaderBaseVisitor<KeySignature>
+public class KeySignatureVisitor : AbcBaseVisitor<KeySignature>
 {
-    public override KeySignature VisitFieldKey([NotNull] AbcHeaderParser.FieldKeyContext context)
+    public override KeySignature VisitFieldKey([NotNull] AbcParser.FieldKeyContext context)
     {
         return Visit(context.keySignature());
     }
 
-    public override KeySignature VisitKeySignature(
-        [NotNull] AbcHeaderParser.KeySignatureContext context
-    )
+    public override KeySignature VisitKeySignature([NotNull] AbcParser.KeySignatureContext context)
     {
         var mode = context.modeKey() is null
             ? Mode.Major
@@ -23,7 +21,7 @@ public class KeySignatureVisitor : AbcHeaderBaseVisitor<KeySignature>
         var accidental = context.accidentalKey() is null
             ? Accidental.Natural
             : new KeyAccidentalVisitor().Visit(context.accidentalKey());
-        var basePitch = BaseNote.FromChar(context.note().GetText().First());
+        var basePitch = BaseNote.FromChar(context.keyNote().GetText().First());
         return new KeySignature(new KeyTonic(basePitch, accidental), mode);
     }
 }
@@ -31,9 +29,9 @@ public class KeySignatureVisitor : AbcHeaderBaseVisitor<KeySignature>
 /// <summary>
 /// Parses the mode portion of a key signature. Currently minor and major are all we support.
 /// </summary>
-internal class KeyModeVisitor : AbcHeaderBaseVisitor<Mode>
+internal class KeyModeVisitor : AbcBaseVisitor<Mode>
 {
-    public override Mode VisitMinor([NotNull] AbcHeaderParser.MinorContext context)
+    public override Mode VisitMinor([NotNull] AbcParser.MinorContext context)
     {
         return Mode.Minor;
     }
@@ -42,14 +40,14 @@ internal class KeyModeVisitor : AbcHeaderBaseVisitor<Mode>
 /// <summary>
 /// Parses the accidental attached to a key signature (e.g. the # in F#).
 /// </summary>
-internal class KeyAccidentalVisitor : AbcHeaderBaseVisitor<Accidental>
+internal class KeyAccidentalVisitor : AbcBaseVisitor<Accidental>
 {
-    public override Accidental VisitSharp([NotNull] AbcHeaderParser.SharpContext context)
+    public override Accidental VisitSharp([NotNull] AbcParser.SharpContext context)
     {
         return Accidental.Sharp;
     }
 
-    public override Accidental VisitFlat([NotNull] AbcHeaderParser.FlatContext context)
+    public override Accidental VisitFlat([NotNull] AbcParser.FlatContext context)
     {
         return Accidental.Flat;
     }

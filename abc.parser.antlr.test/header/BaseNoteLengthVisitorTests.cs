@@ -10,7 +10,7 @@ public class BaseNoteLengthVisitorTests
     public void AcceptsValidRatios([Random(3)] int top, [Random(3)] int bottom)
     {
         var stringUnderTest = $"L:{top}/{bottom}\n";
-        var parser = SetupHeaderHelpers.SetUpParser(stringUnderTest);
+        var parser = SetupHelpers.SetUpParser(stringUnderTest);
         var visitor = new BaseNoteLengthVisitor();
 
         var outcome = visitor.Visit(parser.fieldLength());
@@ -23,7 +23,7 @@ public class BaseNoteLengthVisitorTests
     public void RejectsMissingNumerator([Random(3)] int bottom)
     {
         var stringUnderTest = $"L:/{bottom}\n";
-        var parser = SetupHeaderHelpers.SetUpParser(stringUnderTest);
+        var parser = SetupHelpers.SetUpParser(stringUnderTest);
         var visitor = new BaseNoteLengthVisitor();
 
         var action = () => visitor.Visit(parser.fieldLength());
@@ -35,7 +35,7 @@ public class BaseNoteLengthVisitorTests
     public void RejectsMissingDenominator([Random(3)] int top)
     {
         var stringUnderTest = $"L:{top}/\n";
-        var parser = SetupHeaderHelpers.SetUpParser(stringUnderTest);
+        var parser = SetupHelpers.SetUpParser(stringUnderTest);
         var visitor = new BaseNoteLengthVisitor();
 
         var action = () => visitor.Visit(parser.fieldLength());
@@ -47,7 +47,7 @@ public class BaseNoteLengthVisitorTests
     public void RejectsNonFraction([Random(3)] int num)
     {
         var stringUnderTest = $"L:{num}\n";
-        var parser = SetupHeaderHelpers.SetUpParser(stringUnderTest);
+        var parser = SetupHelpers.SetUpParser(stringUnderTest);
         var visitor = new BaseNoteLengthVisitor();
 
         var action = () => visitor.Visit(parser.fieldLength());

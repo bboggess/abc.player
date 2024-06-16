@@ -16,14 +16,6 @@
 			<GAtn>false</GAtn>
 			<Package>abc.parser.antlr</Package>
 		</Antlr4>
-		<Antlr4 Include="AbcHeader.g4">
-			<GAtn>false</GAtn>
-			<Package>abc.parser.antlr</Package>
-		</Antlr4>
-		<Antlr4 Include="AbcBody.g4">
-			<GAtn>false</GAtn>
-			<Package>abc.parser.antlr</Package>
-		</Antlr4>
 	</ItemGroup>
 
 	<ItemGroup>

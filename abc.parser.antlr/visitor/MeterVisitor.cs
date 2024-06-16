@@ -6,29 +6,25 @@ namespace abc.parser.antlr.visitor;
 /// <summary>
 /// Visitor to handle getting the meter out of an ABC header.
 /// </summary>
-public class MeterVisitor : AbcHeaderBaseVisitor<TimeSignature>
+public class MeterVisitor : AbcBaseVisitor<TimeSignature>
 {
-    public override TimeSignature VisitFieldMeter(
-        [NotNull] AbcHeaderParser.FieldMeterContext context
-    )
+    public override TimeSignature VisitFieldMeter([NotNull] AbcParser.FieldMeterContext context)
     {
         return Visit(context.timeSignature());
     }
 
-    public override TimeSignature VisitCommonTime(
-        [NotNull] AbcHeaderParser.CommonTimeContext context
-    )
+    public override TimeSignature VisitCommonTime([NotNull] AbcParser.CommonTimeContext context)
     {
         return TimeSignature.FromCommonTime();
     }
 
-    public override TimeSignature VisitCutTime([NotNull] AbcHeaderParser.CutTimeContext context)
+    public override TimeSignature VisitCutTime([NotNull] AbcParser.CutTimeContext context)
     {
         return TimeSignature.FromCutTime();
     }
 
     public override TimeSignature VisitFractionMeter(
-        [NotNull] AbcHeaderParser.FractionMeterContext context
+        [NotNull] AbcParser.FractionMeterContext context
     )
     {
         var fraction =

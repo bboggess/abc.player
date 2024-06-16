@@ -9,5 +9,5 @@ public interface IHeaderContextProvider
     /// Provides the context for the full ABC header parser rule.
     /// </summary>
     /// <returns>The full context</returns>
-    AbcHeaderParser.TuneHeaderContext GetHeaderContext();
+    AbcParser.TuneHeaderContext GetHeaderContext();
 }

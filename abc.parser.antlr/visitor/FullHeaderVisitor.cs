@@ -5,7 +5,7 @@ namespace abc.parser.antlr.visitor;
 /// <summary>
 /// Visits the full header, building a tune header object as we go.
 /// </summary>
-internal class FullHeaderVisitor : AbcHeaderBaseVisitor<ITuneHeaderBuilder>
+internal class FullHeaderVisitor : AbcBaseVisitor<ITuneHeaderBuilder>
 {
     private ITuneHeaderBuilder _builder;
 
@@ -24,7 +24,7 @@ internal class FullHeaderVisitor : AbcHeaderBaseVisitor<ITuneHeaderBuilder>
     }
 
     public override ITuneHeaderBuilder VisitFieldNumber(
-        [NotNull] AbcHeaderParser.FieldNumberContext context
+        [NotNull] AbcParser.FieldNumberContext context
     )
     {
         _builder = _builder.WithTrackIndex(new IndexVisitor().Visit(context));
@@ -33,7 +33,7 @@ internal class FullHeaderVisitor : AbcHeaderBaseVisitor<ITuneHeaderBuilder>
     }
 
     public override ITuneHeaderBuilder VisitFieldTitle(
-        [NotNull] AbcHeaderParser.FieldTitleContext context
+        [NotNull] AbcParser.FieldTitleContext context
     )
     {
         _builder = _builder.WithTitle(new TrackTitleVisitor().Visit(context));
@@ -41,9 +41,7 @@ internal class FullHeaderVisitor : AbcHeaderBaseVisitor<ITuneHeaderBuilder>
         return _builder;
     }
 
-    public override ITuneHeaderBuilder VisitFieldKey(
-        [NotNull] AbcHeaderParser.FieldKeyContext context
-    )
+    public override ITuneHeaderBuilder VisitFieldKey([NotNull] AbcParser.FieldKeyContext context)
     {
         _builder = _builder.WithKey(new KeySignatureVisitor().Visit(context));
 
@@ -51,7 +49,7 @@ internal class FullHeaderVisitor : AbcHeaderBaseVisitor<ITuneHeaderBuilder>
     }
 
     public override ITuneHeaderBuilder VisitFieldComposer(
-        [NotNull] AbcHeaderParser.FieldComposerContext context
+        [NotNull] AbcParser.FieldComposerContext context
     )
     {
         _builder = _builder.WithComposer(new ComposerVisitor().Visit(context));
@@ -60,7 +58,7 @@ internal class FullHeaderVisitor : AbcHeaderBaseVisitor<ITuneHeaderBuilder>
     }
 
     public override ITuneHeaderBuilder VisitFieldLength(
-        [NotNull] AbcHeaderParser.FieldLengthContext context
+        [NotNull] AbcParser.FieldLengthContext context
     )
     {
         _builder = _builder.WithDefaultNoteLength(new BaseNoteLengthVisitor().Visit(context));
@@ -69,7 +67,7 @@ internal class FullHeaderVisitor : AbcHeaderBaseVisitor<ITuneHeaderBuilder>
     }
 
     public override ITuneHeaderBuilder VisitFieldMeter(
-        [NotNull] AbcHeaderParser.FieldMeterContext context
+        [NotNull] AbcParser.FieldMeterContext context
     )
     {
         _builder = _builder.WithMeter(new MeterVisitor().Visit(context));
@@ -78,7 +76,7 @@ internal class FullHeaderVisitor : AbcHeaderBaseVisitor<ITuneHeaderBuilder>
     }
 
     public override ITuneHeaderBuilder VisitFieldTempo(
-        [NotNull] AbcHeaderParser.FieldTempoContext context
+        [NotNull] AbcParser.FieldTempoContext context
     )
     {
         _builder = _builder.WithTempo(new TempoVisitor().Visit(context));

@@ -6,16 +6,14 @@ namespace abc.parser.antlr.visitor;
 /// <summary>
 /// Gets the tempo definition from an ABC header
 /// </summary>
-public class TempoVisitor : AbcHeaderBaseVisitor<TempoDefinition>
+public class TempoVisitor : AbcBaseVisitor<TempoDefinition>
 {
-    public override TempoDefinition VisitFieldTempo(
-        [NotNull] AbcHeaderParser.FieldTempoContext context
-    )
+    public override TempoDefinition VisitFieldTempo([NotNull] AbcParser.FieldTempoContext context)
     {
         return Visit(context.tempoDef());
     }
 
-    public override TempoDefinition VisitTempoDef([NotNull] AbcHeaderParser.TempoDefContext context)
+    public override TempoDefinition VisitTempoDef([NotNull] AbcParser.TempoDefContext context)
     {
         var fraction =
             new FractionVisitor().Visit(context.fraction()) ?? throw new ParseException(context);

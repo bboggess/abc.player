@@ -15,7 +15,7 @@ public partial class RequiredFieldsHeaderTests
             K:C
 
             """;
-        var parser = SetupHeaderHelpers.SetUpParser(headerWithoutTitle);
+        var parser = SetupHelpers.SetUpParser(headerWithoutTitle);
 
         var action = () =>
         {
@@ -33,7 +33,7 @@ public partial class RequiredFieldsHeaderTests
             T:Piece 1
 
             """;
-        var parser = SetupHeaderHelpers.SetUpParser(headerWithoutKey);
+        var parser = SetupHelpers.SetUpParser(headerWithoutKey);
 
         var action = () =>
         {
@@ -51,7 +51,7 @@ public partial class RequiredFieldsHeaderTests
             K:C
 
             """;
-        var parser = SetupHeaderHelpers.SetUpParser(headerWithoutTrack);
+        var parser = SetupHelpers.SetUpParser(headerWithoutTrack);
 
         var action = () =>
         {

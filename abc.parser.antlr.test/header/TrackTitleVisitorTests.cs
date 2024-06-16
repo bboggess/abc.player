@@ -9,7 +9,7 @@ public class TrackTitleVisitorTests
     public void ParseNonEmptyTitle()
     {
         var stringUnderTest = "T:Opus No. 2\n";
-        var parser = SetupHeaderHelpers.SetUpParser(stringUnderTest);
+        var parser = SetupHelpers.SetUpParser(stringUnderTest);
         var visitor = new TrackTitleVisitor();
 
         var outcome = visitor.Visit(parser.fieldTitle());
@@ -21,7 +21,7 @@ public class TrackTitleVisitorTests
     public void RejectsWhitespaceTitle()
     {
         var stringUnderTest = "T: \t  \n";
-        var parser = SetupHeaderHelpers.SetUpParser(stringUnderTest);
+        var parser = SetupHelpers.SetUpParser(stringUnderTest);
         var visitor = new TrackTitleVisitor();
 
         var action = () => visitor.Visit(parser.fieldTitle());
@@ -33,7 +33,7 @@ public class TrackTitleVisitorTests
     public void RejectsEmptyTitle()
     {
         var stringUnderTest = "T:\n";
-        var parser = SetupHeaderHelpers.SetUpParser(stringUnderTest);
+        var parser = SetupHelpers.SetUpParser(stringUnderTest);
         var visitor = new TrackTitleVisitor();
 
         var action = () => visitor.Visit(parser.fieldTitle());

@@ -7,7 +7,7 @@ namespace abc.parser.antlr;
 /// Listener for a walk over an ABC tune body. Raises the appropriate events that the higher
 /// level domain parsing logic can handle.
 /// </summary>
-public class TuneBodyListener : AbcBodyBaseListener
+public class TuneBodyListener : AbcBaseListener
 {
     private readonly ITuneBodyParser _parser;
     private NoteParseContext _currentNote;
@@ -23,7 +23,7 @@ public class TuneBodyListener : AbcBodyBaseListener
         _currentNote = new NoteParseContext();
     }
 
-    public override void ExitNote([NotNull] AbcBodyParser.NoteContext context)
+    public override void ExitNote([NotNull] AbcParser.NoteContext context)
     {
         if (_currentNote.Duration is not NoteDuration duration)
         {
@@ -51,12 +51,12 @@ public class TuneBodyListener : AbcBodyBaseListener
         _currentNote = new NoteParseContext();
     }
 
-    public override void EnterOctave([NotNull] AbcBodyParser.OctaveContext context)
+    public override void EnterOctave([NotNull] AbcParser.OctaveContext context)
     {
         _currentNote.OctaveDescriptor = context.GetText();
     }
 
-    public override void EnterAccidental([NotNull] AbcBodyParser.AccidentalContext context)
+    public override void EnterAccidental([NotNull] AbcParser.AccidentalContext context)
     {
         if (_currentNote.Pitch is not char pitch)
         {
@@ -71,7 +71,7 @@ public class TuneBodyListener : AbcBodyBaseListener
         _parser.AddAccidental(accidentalEvent);
     }
 
-    public override void EnterPitch([NotNull] AbcBodyParser.PitchContext context)
+    public override void EnterPitch([NotNull] AbcParser.PitchContext context)
     {
         var writtenNote = context.baseNote().GetText();
 
@@ -83,7 +83,7 @@ public class TuneBodyListener : AbcBodyBaseListener
         _currentNote.Pitch = writtenNote.First();
     }
 
-    public override void EnterNoteLength([NotNull] AbcBodyParser.NoteLengthContext context)
+    public override void EnterNoteLength([NotNull] AbcParser.NoteLengthContext context)
     {
         var pieces = context.GetText().Split('/');
         var includesSlash = pieces.Length > 1;

@@ -15,7 +15,7 @@ public class TuneBodyListenerTests
 
         var listener = new TuneBodyListener(mockBuilder.Object);
         var walker = new ParseTreeWalker();
-        var parser = SetupBodyHelpers.SetUpParser(stringUnderTest);
+        var parser = SetupHelpers.SetUpParser(stringUnderTest);
 
         walker.Walk(listener, parser.tuneBody());
 
@@ -34,7 +34,7 @@ public class TuneBodyListenerTests
 
         var listener = new TuneBodyListener(mockBuilder.Object);
         var walker = new ParseTreeWalker();
-        var parser = SetupBodyHelpers.SetUpParser(stringUnderTest);
+        var parser = SetupHelpers.SetUpParser(stringUnderTest);
 
         walker.Walk(listener, parser.tuneBody());
 
@@ -50,7 +50,7 @@ public class TuneBodyListenerTests
 
         var listener = new TuneBodyListener(mockBuilder.Object);
         var walker = new ParseTreeWalker();
-        var parser = SetupBodyHelpers.SetUpParser(stringUnderTest);
+        var parser = SetupHelpers.SetUpParser(stringUnderTest);
 
         walker.Walk(listener, parser.tuneBody());
 
@@ -66,7 +66,7 @@ public class TuneBodyListenerTests
 
         var listener = new TuneBodyListener(mockBuilder.Object);
         var walker = new ParseTreeWalker();
-        var parser = SetupBodyHelpers.SetUpParser(stringUnderTest);
+        var parser = SetupHelpers.SetUpParser(stringUnderTest);
 
         walker.Walk(listener, parser.tuneBody());
 
@@ -82,7 +82,7 @@ public class TuneBodyListenerTests
 
         var listener = new TuneBodyListener(mockBuilder.Object);
         var walker = new ParseTreeWalker();
-        var parser = SetupBodyHelpers.SetUpParser(stringUnderTest);
+        var parser = SetupHelpers.SetUpParser(stringUnderTest);
 
         walker.Walk(listener, parser.tuneBody());
 
@@ -100,7 +100,7 @@ public class TuneBodyListenerTests
 
         var listener = new TuneBodyListener(mockBuilder.Object);
         var walker = new ParseTreeWalker();
-        var parser = SetupBodyHelpers.SetUpParser(stringUnderTest);
+        var parser = SetupHelpers.SetUpParser(stringUnderTest);
 
         walker.Walk(listener, parser.tuneBody());
 
@@ -124,7 +124,7 @@ public class TuneBodyListenerTests
 
         var listener = new TuneBodyListener(mockBuilder.Object);
         var walker = new ParseTreeWalker();
-        var parser = SetupBodyHelpers.SetUpParser(stringUnderTest);
+        var parser = SetupHelpers.SetUpParser(stringUnderTest);
 
         walker.Walk(listener, parser.tuneBody());
 
@@ -150,7 +150,7 @@ public class TuneBodyListenerTests
 
         var listener = new TuneBodyListener(mockBuilder.Object);
         var walker = new ParseTreeWalker();
-        var parser = SetupBodyHelpers.SetUpParser(stringUnderTest);
+        var parser = SetupHelpers.SetUpParser(stringUnderTest);
 
         walker.Walk(listener, parser.tuneBody());
 
@@ -176,7 +176,7 @@ public class TuneBodyListenerTests
 
         var listener = new TuneBodyListener(mockBuilder.Object);
         var walker = new ParseTreeWalker();
-        var parser = SetupBodyHelpers.SetUpParser(stringUnderTest);
+        var parser = SetupHelpers.SetUpParser(stringUnderTest);
 
         walker.Walk(listener, parser.tuneBody());
 
@@ -202,7 +202,7 @@ public class TuneBodyListenerTests
 
         var listener = new TuneBodyListener(mockBuilder.Object);
         var walker = new ParseTreeWalker();
-        var parser = SetupBodyHelpers.SetUpParser(stringUnderTest);
+        var parser = SetupHelpers.SetUpParser(stringUnderTest);
 
         walker.Walk(listener, parser.tuneBody());
 
@@ -228,7 +228,7 @@ public class TuneBodyListenerTests
 
         var listener = new TuneBodyListener(mockBuilder.Object);
         var walker = new ParseTreeWalker();
-        var parser = SetupBodyHelpers.SetUpParser(stringUnderTest);
+        var parser = SetupHelpers.SetUpParser(stringUnderTest);
 
         walker.Walk(listener, parser.tuneBody());
 
@@ -254,7 +254,7 @@ public class TuneBodyListenerTests
 
         var listener = new TuneBodyListener(mockBuilder.Object);
         var walker = new ParseTreeWalker();
-        var parser = SetupBodyHelpers.SetUpParser(stringUnderTest);
+        var parser = SetupHelpers.SetUpParser(stringUnderTest);
 
         var tokens = parser.TokenStream;
 
@@ -282,7 +282,7 @@ public class TuneBodyListenerTests
 
         var listener = new TuneBodyListener(mockBuilder.Object);
         var walker = new ParseTreeWalker();
-        var parser = SetupBodyHelpers.SetUpParser(stringUnderTest);
+        var parser = SetupHelpers.SetUpParser(stringUnderTest);
 
         var tokens = parser.TokenStream;
 

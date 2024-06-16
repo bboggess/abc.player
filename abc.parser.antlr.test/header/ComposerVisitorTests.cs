@@ -9,7 +9,7 @@ public class ComposerVisitorTests
     public void ParseNonEmptyName()
     {
         var stringUnderTest = "C:my composer's name\n";
-        var parser = SetupHeaderHelpers.SetUpParser(stringUnderTest);
+        var parser = SetupHelpers.SetUpParser(stringUnderTest);
         var visitor = new ComposerVisitor();
 
         var outcome = visitor.Visit(parser.fieldComposer());
@@ -21,7 +21,7 @@ public class ComposerVisitorTests
     public void RejectsWhitespaceName()
     {
         var stringUnderTest = "C: \t  \n";
-        var parser = SetupHeaderHelpers.SetUpParser(stringUnderTest);
+        var parser = SetupHelpers.SetUpParser(stringUnderTest);
         var visitor = new ComposerVisitor();
 
         var action = () => visitor.Visit(parser.fieldComposer());
@@ -33,7 +33,7 @@ public class ComposerVisitorTests
     public void RejectsEmptyName()
     {
         var stringUnderTest = "C:\n";
-        var parser = SetupHeaderHelpers.SetUpParser(stringUnderTest);
+        var parser = SetupHelpers.SetUpParser(stringUnderTest);
         var visitor = new ComposerVisitor();
 
         var action = () => visitor.Visit(parser.fieldComposer());

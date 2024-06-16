@@ -6,9 +6,9 @@ namespace abc.parser.antlr.visitor;
 /// Parses a free text field. It is assumed that when present, these fields should be
 /// nonempty. An exception will be thrown if the text is not given.
 /// </summary>
-public class FreeTextVisitor : AbcHeaderBaseVisitor<string>
+public class FreeTextVisitor : AbcBaseVisitor<string>
 {
-    public override string VisitText([NotNull] AbcHeaderParser.TextContext context)
+    public override string VisitText([NotNull] AbcParser.TextContext context)
     {
         var text = context.GetText();
 

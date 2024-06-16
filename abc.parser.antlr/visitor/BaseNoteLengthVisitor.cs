@@ -6,9 +6,9 @@ namespace abc.parser.antlr.visitor;
 /// <summary>
 /// Parsing the note length to use as the base for all notes in the body
 /// </summary>
-public class BaseNoteLengthVisitor : AbcHeaderBaseVisitor<Ratio>
+public class BaseNoteLengthVisitor : AbcBaseVisitor<Ratio>
 {
-    public override Ratio VisitFieldLength([NotNull] AbcHeaderParser.FieldLengthContext context)
+    public override Ratio VisitFieldLength([NotNull] AbcParser.FieldLengthContext context)
     {
         return new FractionVisitor().Visit(context.fraction()) ?? throw new ParseException(context);
     }
