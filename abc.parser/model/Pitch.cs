@@ -56,6 +56,18 @@ public class Pitch
         return new Pitch(_midiValue + numSemitones);
     }
 
+    /// <summary>
+    /// Raise or lower the octave of the note.
+    /// </summary>
+    /// <param name="numOctavesUp">Positive makes the note higher, negative makes lower</param>
+    /// <returns>A new Pitch that is the same note, but in a new octave.</returns>
+    public Pitch ChangeOctave(int numOctavesUp)
+    {
+        return new Pitch(_midiValue + numOctavesUp * BaseNote.NumChromaticNotes);
+    }
+
+    public byte MidiValue => byte.CreateChecked(_midiValue);
+
     public override bool Equals(object? obj)
     {
         if (obj is Pitch other)
@@ -74,5 +86,21 @@ public class Pitch
     public override int GetHashCode()
     {
         return _midiValue;
+    }
+
+    /// <summary>
+    /// Notes are often specified by name, and ABC also encodes octave info
+    /// in this name. Passing in 'C' is middle C, and 'c' is one octave down.
+    ///
+    /// This only supports natural notes.
+    /// </summary>
+    /// <param name="name">The name of the note</param>
+    /// <returns>The named pitch</returns>
+    public static Pitch ParseFromNoteName(char name)
+    {
+        var baseNote = BaseNote.FromChar(name);
+        var octave = char.IsUpper(name) ? 0 : -1;
+
+        return new Pitch(baseNote, octave);
     }
 }
