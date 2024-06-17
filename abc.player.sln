@@ -11,7 +11,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "abc.parser.antlr", "abc.par
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "abc.parser", "abc.parser\abc.parser.csproj", "{4D223B60-E9F8-4D97-89B3-80F0305FC272}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "abc.parser.test", "abc.parser.test\abc.parser.test.csproj", "{E9922F3B-5C40-4AD0-AC6A-FBFFC68FDB06}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "abc.parser.test", "abc.parser.test\abc.parser.test.csproj", "{E9922F3B-5C40-4AD0-AC6A-FBFFC68FDB06}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6806ACD0-7C1E-40FF-82F6-05AB69598B4B}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
