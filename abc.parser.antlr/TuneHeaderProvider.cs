@@ -9,7 +9,7 @@ namespace abc.parser.antlr;
 public class TuneHeaderProvider : ITuneHeaderProvider
 {
     private readonly ITuneHeaderBuilder _builder;
-    private readonly IHeaderContextProvider _contextProvider;
+    private readonly AbcContextProvider _contextProvider;
 
     /// <summary>
     /// Constructs our provider from the context of a header parse tree.
@@ -17,23 +17,20 @@ public class TuneHeaderProvider : ITuneHeaderProvider
     /// <param name="headerBuilder">Builder object for our header, used to set fields as we come across them.</param>
     /// <param name="contextProvider">The parsing context for the source of the header, e.g. from a file</param>
     /// <exception cref="ArgumentNullException">either argument is null</exception>
-    public TuneHeaderProvider(
-        ITuneHeaderBuilder headerBuilder,
-        IHeaderContextProvider contextProvider
-    )
+    public TuneHeaderProvider(ITuneHeaderBuilder headerBuilder, AbcContextProvider provider)
     {
-        if (headerBuilder == null)
+        if (headerBuilder is null)
         {
             throw new ArgumentNullException(nameof(headerBuilder));
         }
 
-        if (contextProvider is null)
+        if (provider is null)
         {
-            throw new ArgumentNullException(nameof(contextProvider));
+            throw new ArgumentNullException(nameof(provider));
         }
 
         _builder = headerBuilder;
-        _contextProvider = contextProvider;
+        _contextProvider = provider;
     }
 
     public TuneHeader GetTuneHeader()
