@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace abc.parser.model;
+﻿namespace abc.parser.model;
 
 /// <summary>
 /// Represents a pitch that can be played, without reference to how long it should be
