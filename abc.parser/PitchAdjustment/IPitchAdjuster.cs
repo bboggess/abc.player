@@ -1,6 +1,6 @@
 ﻿using abc.parser.model;
 
-namespace abc.parser;
+namespace abc.parser.PitchAdjustment;
 
 /// <summary>
 /// An interface for applying adjustments to a given pitch.
