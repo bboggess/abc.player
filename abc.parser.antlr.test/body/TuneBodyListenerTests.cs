@@ -94,7 +94,7 @@ public class TuneBodyListenerTests
         [Values("__", "_", "=", "^", "^^")] string accidental
     )
     {
-        var stringUnderTest = $"C{accidental}CCC";
+        var stringUnderTest = $"D{accidental}CE";
 
         var mockBuilder = new Mock<ITuneBodyParser>();
 
