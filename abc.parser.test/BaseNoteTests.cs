@@ -106,4 +106,64 @@ public class BaseNoteTests
 
         Assert.That(result, Is.EqualTo(0));
     }
+
+    [Test]
+    public void Transpose_PositiveNumber_MovesUp()
+    {
+        var startingNote = BaseNote.C;
+
+        var result = startingNote.Transpose(2);
+
+        Assert.That(result, Is.EqualTo(BaseNote.D));
+    }
+
+    [Test]
+    public void Transpose_FullOctave_ReturnsSameNote()
+    {
+        var startingNote = BaseNote.C;
+
+        var result = startingNote.Transpose(12);
+
+        Assert.That(result, Is.EqualTo(startingNote));
+    }
+
+    [Test]
+    public void Transpose_MoreThanFullOctave_ReturnsCorrectNote()
+    {
+        var startingNote = BaseNote.C;
+
+        var result = startingNote.Transpose(14);
+
+        Assert.That(result, Is.EqualTo(BaseNote.D));
+    }
+
+    [Test]
+    public void Transpose_NegativeValue_StepsDown()
+    {
+        var startingNote = BaseNote.C;
+
+        var result = startingNote.Transpose(-2);
+
+        Assert.That(result, Is.EqualTo(BaseNote.ASharp));
+    }
+
+    [Test]
+    public void Transpose_NegativeValue_WrapsCorrectly()
+    {
+        var startingNote = BaseNote.C;
+
+        var result = startingNote.Transpose(-5);
+
+        Assert.That(result, Is.EqualTo(BaseNote.G));
+    }
+
+    [Test]
+    public void Transpose_NegativeFullOctave_BehavesCorrectly()
+    {
+        var startingNote = BaseNote.C;
+
+        var result = startingNote.Transpose(-14);
+
+        Assert.That(result, Is.EqualTo(BaseNote.ASharp));
+    }
 }

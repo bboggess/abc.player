@@ -21,11 +21,28 @@ public class BaseNote
     public static readonly BaseNote G = new(10);
     public static readonly BaseNote GSharp = new(11);
 
+    // Lookup table for notes, so we don't ever need to instantiate new values.
+    private static readonly BaseNote[] _allNotes =
+    {
+        A,
+        ASharp,
+        B,
+        C,
+        CSharp,
+        D,
+        DSharp,
+        E,
+        F,
+        FSharp,
+        G,
+        GSharp
+    };
+
     private readonly int _value;
 
     private BaseNote(int value)
     {
-        _value = (value % NumChromaticNotes + NumChromaticNotes) % NumChromaticNotes;
+        _value = WrapNoteValue(value);
     }
 
     /// <summary>
@@ -47,7 +64,8 @@ public class BaseNote
     /// <returns>A new note shifted up or down by <paramref name="numSemitones"/></returns>
     public BaseNote Transpose(int numSemitones)
     {
-        return new BaseNote(_value + numSemitones);
+        var newValue = WrapNoteValue(_value + numSemitones);
+        return _allNotes[newValue];
     }
 
     /// <summary>
@@ -122,6 +140,17 @@ public class BaseNote
 
     public static IEnumerable<BaseNote> AllNotes()
     {
-        return new[] { A, ASharp, B, C, CSharp, D, DSharp, E, F, FSharp, G, GSharp };
+        return _allNotes.ToList();
+    }
+
+    /// <summary>
+    /// Takes the note value and makes sure it appropriately fits in the range
+    /// between 0 and 11, inclusive. Handles negative numbers as well.
+    /// </summary>
+    /// <param name="value">value assigned for a note</param>
+    /// <returns><paramref name="value"/> mod 12, forces to be positive</returns>
+    private static int WrapNoteValue(int value)
+    {
+        return (value % NumChromaticNotes + NumChromaticNotes) % NumChromaticNotes;
     }
 }
